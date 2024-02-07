@@ -401,7 +401,7 @@ How to conduct filter queries from a dataset
 ```
 
 ```{r}
-#your answer here
+#$52000
 ```
 
 ```         
@@ -409,7 +409,7 @@ How to conduct filter queries from a dataset
 ```
 
 ```{r}
-#your answer here
+#news, executive editor; noanswer; black
 ```
 
 ```         
@@ -417,7 +417,7 @@ How to conduct filter queries from a dataset
 ```
 
 ```{r}
-#your answer here
+#$50350; 1650 less than NYT
 
 ```
 
