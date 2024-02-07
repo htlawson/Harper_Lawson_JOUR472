@@ -399,16 +399,19 @@ How to conduct filter queries from a dataset
 ```         
 1: Build a table for NewYorkTimes employees, and determine median salary of NewYorkTimes employees   
 ```
-
 ```{r}
-#$52000
-```
+NYT <- subset(MediaBucks, COMPANY=="NewYorkTimes")
+summary(NYT$Salary)
 
+#$52000
 ```         
   2: Identify title, gender and race of the highest paid position at NYT  
 ```
 
+
 ```{r}
+view(NYT)
+
 #news, executive editor; noanswer; black
 ```
 
@@ -416,7 +419,16 @@ How to conduct filter queries from a dataset
 3: Search for Bloomberg,  check median salary, compare to NYT results above.
 ```
 
+
+
+
+
+
 ```{r}
+```{r}
+BLM <- subset(MediaBucks, COMPANY=="Bloomberg")
+summary(BLM$Salary)
+
 #$50350; 1650 less than NYT
 
 ```
