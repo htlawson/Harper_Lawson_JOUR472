@@ -310,7 +310,7 @@ Let's pull in another dataset and summarize by group.
 
 ```{r, message=FALSE}
 #loading 2020 and 2010 Baltimore City population by race
-baltcity_race <- read_csv("assets/data/baltcity_race_8_13.csv") %>% 
+ %>% 
   as.data.frame()
 ```
 
@@ -357,3 +357,19 @@ baltcity_income %>%
 ```
 ### 48.5% of neighborhoods below median income
 \`\`\`
+
+#Class Lecture
+```{r}
+baltcity_race %>%
+  select(census_tract, x2020_white, x2020_black) %>%
+  mutate(ratio_w_b = round(x2020_black/x2020_white,2)) %>%
+  arrange(desc(ratio_w_b))
+
+sum(baltcity_race$x2020_white, na.rm = TRUE)
+```
+```{r}
+baltcity_race %>%
+  select(census_tract, x2020_white) %>%
+  mutate(pct_white = round(x2020_white/(sum(baltcity_race$x2020_white, na.rm = TRUE)),2)) %>%
+  arrange(desc(pct_white))
+```
