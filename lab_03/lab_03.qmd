@@ -70,7 +70,7 @@ md_race %>%
   group_by(place) %>%
   arrange(desc(x2020_black))
 ```
-# see above
+# Top 10: Baltimore City, Waldorf CDP, Bowie City, Clinton CDP, Columbia CDP, Randallstown CDP, Milford Mill CDP, Silver Spring CDP, Woodlawn CDP, Suitland CDP
 
 
 
