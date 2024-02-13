@@ -49,10 +49,13 @@ A1:
 
 ```{r}
 
-# md_race %>% 
-  
+# 
+md_race %>% 
+  select(place, x2020_hispanic) %>% 
+  slice_max(x2020_hispanic, n = 5)
+```  
 
-# your answer here
+# Baltimore City, Wheaton CDP, Germantown CDP, Silver Spring CDP, Aspen Hill CDP
 
 ```
 
@@ -61,18 +64,27 @@ Q2: Find the cities with the largest Black population and arrange the results in
 A2:
 
 ```{r}
-#write your code here
-
-# your answer here
-
+```{r}
+md_race %>% 
+  select(place, x2020_black) %>%
+  group_by(place) %>%
+  arrange(desc(x2020_black))
 ```
+# see above
+
+
 
 Q3: Create a table called top_hispanic that shows the top 15 communities with the largest Hispanic population in 2020, and also display the 2010 Hispanic population and the total community population for 2020. Look at your results - what stands out to you? Craft a one-paragraph story pitch for your editor.
 
 A3:
 
+
 ```{r}
-
-# your answer here
-
+top_hispanic <- md_race %>% 
+  select(place, x2020_hispanic, x2010_hispanic) %>% 
+  slice_max(x2020_hispanic, n = 15)
+  
 ```
+# All of the listed neighborhoods showed a substantial increase in their Hispanic populations, with Baltimore City's hispanic population increasing by around 10,000 people from 2010 to 2020. The lowest increase on the table was still in the thousands. A story could be that every single neighborhood with the 15 highest Hispanic populations experienced an increase, and Baltimore City's was especially high.
+
+
