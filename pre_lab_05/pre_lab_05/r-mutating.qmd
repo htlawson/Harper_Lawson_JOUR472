@@ -208,8 +208,39 @@ maryland_income %>%
  
 ```
 
-**Question #2:** Answer this question in English: Write in Elms
+Question #2:
 
-2)  Building on the previous lesson on filtering, describe how you would determine the median value of the percentage change and produce a table with the 10 neighborhoods with the highest change and the 10 with the lowest change.
+2.  A\) Determine the summary statistics of mdcities median income for 2020. Determine the value for the first quartile.
+
+    B\) Use mutate and case_when to create a column called “category.” Within this, label cities in the first quartile as “lowest” and the remaining “above”. Create a new table called “lowest” with your results
+
+```{r}
+
+# A
+
+maryland_income %>%
+ summary(median_inc_2020)
+
+# First quartile value: 63327
+ 
+```
+
+```{r}
+
+lowest <- maryland_income %>%
+  mutate(
+    category = case_when(
+      median_inc_2020 >= 63327 ~ "above",
+      median_inc_2020 <= 63327 ~ "lowest"
+    )
+  )
+lowest %>%
+  select(place, median_inc_2020, category)
+
+```
+
+**Question #3:** Answer this question in English: Write in Elms
+
+3.  Building on the previous lesson on filtering, describe how you would determine the median value of the percentage change and produce a table with the 10 neighborhoods with the highest change and the 10 with the lowest change.
 
 I would determine the median value by entering median(pct_change) after selecting the place and pct_change columns. I would then find the value of the 10th highest and 10th lowest pct_change values by arranging the pct_change values to descend then ascend, and use a filter to set pct_change as greater than and less than those values (pct_change \> \[10th highest\] and pct_change \< \[10th lowest\]).
