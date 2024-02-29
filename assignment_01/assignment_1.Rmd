@@ -19,30 +19,32 @@ library (dplyr)
 
 ```
 
-To load and view the necessary data:
+To load the necessary data:
 
 ```{r}
 
 balt_pop <- read_csv("balt_pop_16_19.csv")
-view(balt_pop)
 
 ```
 
 For each year, the values below are the percent of 16-19-year-olds in Baltimore who are either enrolled in school or employed.
 
-Question 1:
-Which 5 communities in Baltimore experienced the highest growth of 16-19 year olds who were either employed or enrolled in school? Which 5 experienced the least growth (largest decrease)? What was the percent change of each?
+Question 1: A) Which 5 communities in Baltimore experienced the highest growth of 16-19 year olds who were either employed or enrolled in school? What was the percent change of each?
+
+To make a new data frame with growth info:
 
 ```{r}
 
-growth <- balt_pop %>% #Creates new data frame
-  select(Place_1, Place_2, x2010, x2020) %>% #Selects which columns will be in the new data frame
-  mutate(pct_change = ((x2020-x2010)/x2010)*100) #Adds column for percent change and calculates percent change
+growth <- balt_pop %>%
+  select(Place_1, Place_2, x2010, x2020) %>%
+  mutate(pct_change = round(((x2020-x2010)/x2010)*100, 2))
 
 ```
 
 To calculate the 5 communities with the highest growth:
+
 ```{r}
+
 growth %>%
   group_by(Place_1) %>%
   summarise(
@@ -50,17 +52,102 @@ growth %>%
   ) %>% 
   arrange(desc(pct_change)) %>%
   head(5)
+
 ```
-To calculate the 5 communities with the least growth:
+
+B)  South Baltimore had the highest growth by a landslide. What percentage of 16-19-year-olds were in school or employed in 2010? 2015? 2020?
+
 ```{r}
-growth %>%
-  group_by(Place_1) %>%
-  summarise(
-    pct_change
-  ) %>% 
-  arrange(pct_change) %>%
-  head(5)
+
+south_balt <- subset(balt_pop, Place_1 == "South Baltimore")
+
+south_balt %>%  
+select(Place_1, x2010, x2015, x2020)
+
 ```
 
+By looking at my new south_balt table and visualization, I can see that 47.92% of 16-19-year-olds were in school or employed in 2010, 98.48% in 2015, and 100.00% in 2020. Was this growth gradual, or did it happen quickly over a short time period?
 
+Question 2: Which one-year period showed the highest growth in South Baltimore?
 
+```{r}
+
+south_balt <- south_balt %>%
+  mutate(pct_change_2010_2011 = round(((x2011-x2010)/x2010)*100, 2)) %>%
+  mutate(pct_change_2011_2012 = round(((x2012-x2011)/x2011)*100, 2)) %>%
+  mutate(pct_change_2012_2013 = round(((x2013-x2012)/x2012)*100, 2)) %>%
+  mutate(pct_change_2013_2014 = round(((x2014-x2013)/x2013)*100, 2)) %>%
+  mutate(pct_change_2014_2015 = round(((x2015-x2014)/x2014)*100, 2)) %>%
+  mutate(pct_change_2015_2016 = round(((x2016-x2015)/x2015)*100, 2)) %>%
+  mutate(pct_change_2016_2017 = round(((x2017-x2016)/x2016)*100, 2)) %>%
+  mutate(pct_change_2017_2018 = round(((x2018-x2017)/x2017)*100, 2)) %>%
+  mutate(pct_change_2018_2019 = round(((x2019-x2018)/x2018)*100, 2)) %>%
+  mutate(pct_change_2019_2020 = round(((x2020-x2019)/x2019)*100, 2))
+
+south_balt %>%  
+  select(pct_change_2010_2011, pct_change_2011_2012, pct_change_2012_2013, pct_change_2013_2014, pct_change_2014_2015, pct_change_2015_2016, pct_change_2016_2017, pct_change_2017_2018, pct_change_2018_2019, pct_change_2019_2020)
+
+```
+
+As we can see from this table, 2012-2013 experienced the highest growth of 16-19-year-olds in school or employed at 83.83%.
+
+Question 3: A) Looking at the south_balt table, when was the percentage of 16-19-year-olds in school or employed in South Baltimore at or below 50%?
+
+```{r}
+
+south_balt %>%
+  select(x2010, x2011, x2012, x2013, x2014, x2015, x2016, x2017, x2018, x2019, x2020)
+
+```
+
+We can see from this table that the percentage of 16-19-year-olds in school or employed in South Baltimore was at or below 50% in 2010, 2011, and 2012.
+
+B)  How do these values compare to Baltimore's averages during these years?
+
+First, I will organize the mean values of 2010, 2011, and 2012.
+
+```{r}
+
+  balt_means <- colMeans(select(balt_pop, x2010, x2011, x2012), na.rm = TRUE)
+  tibble(Year = c("x2010", "x2011", "x2012"), Mean = balt_means)
+
+```
+
+Now, I will look at the South Baltimore values again on their own...
+
+```{r}
+
+south_balt %>%
+  select(x2010, x2011, x2012)
+
+```
+
+...assign some values...
+
+```{r}
+
+#2010
+south_balt_2010 <- 47.92
+mean_2010 <- 84.73
+
+#2011
+south_balt_2011 <- 50.00
+mean_2011 <- 85.30
+
+#2012
+south_balt_2012 <- 37.04
+mean_2012 <- 86.00
+
+```
+
+...and do some math.
+
+```{r}
+mean_2010-south_balt_2010
+mean_2011-south_balt_2011
+mean_2012-south_balt_2012
+```
+
+And now we see how far South Baltimore's 2010-12 percentages were below Baltimore's mean values.
+
+In conclusion, 2010-2012 was a major low point for the community of South Baltimore compared to Baltimore as a whole in terms of how many 16-19-year-olds were in school or employed. On the other hand, 2012-2013 showed amazing growth.

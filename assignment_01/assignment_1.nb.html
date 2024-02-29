@@ -1770,40 +1770,29 @@ library (dplyr)
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>To load and view the necessary data:</p>
+<p>To load the necessary data:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5iYWx0X3BvcCA8LSByZWFkX2NzdihcImJhbHRfcG9wXzE2XzE5LmNzdlwiKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5iYWx0X3BvcCA8LSByZWFkX2NzdihcImJhbHRfcG9wXzE2XzE5LmNzdlwiKVxuXG5gYGAifQ== -->
 <pre class="r"><code>
-balt_pop &lt;- read_csv(&quot;balt_pop_16_19.csv&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNTUgQ29sdW1uczogMTbilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgICgyKTogUGxhY2VfMSwgUGxhY2VfMlxuZGJsICgxNCk6IE9CSkVDVElELCB4MjAxMCwgeDIwMTEsIHgyMDEyLCB4MjAxMywgeDIwMTQsIHgyMDE1LCB4MjAxNiwgeDIwMTcsIHgyMDE4LCB4MjAxOSwgeDIwMjAsIFNoYXBlX19BcmVhLCBTaGFwZV9fLi4uXG7ihLkgVXNlIGBzcGVjKClgIHRvIHJldHJpZXZlIHRoZSBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9uIGZvciB0aGlzIGRhdGEuXG7ihLkgU3BlY2lmeSB0aGUgY29sdW1uIHR5cGVzIG9yIHNldCBgc2hvd19jb2xfdHlwZXMgPSBGQUxTRWAgdG8gcXVpZXQgdGhpcyBtZXNzYWdlLlxuIn0= -->
-<pre><code>Rows: 55 Columns: 16── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
-Delimiter: &quot;,&quot;
-chr  (2): Place_1, Place_2
-dbl (14): OBJECTID, x2010, x2011, x2012, x2013, x2014, x2015, x2016, x2017, x2018, x2019, x2020, Shape__Area, Shape__...
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudmlldyhiYWx0X3BvcClcblxuYGBgIn0= -->
-<pre class="r"><code>view(balt_pop)
+balt_pop &lt;- read_csv(&quot;balt_pop_16_19.csv&quot;)
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>For each year, the values below are the percent of 16-19-year-olds in
 Baltimore who are either enrolled in school or employed.</p>
-<p>Question 1: Which 5 communities in Baltimore experienced the highest
-growth of 16-19 year olds who were either employed or enrolled in
-school? Which 5 experienced the least growth (largest decrease)? What
-was the percent change of each?</p>
+<p>Question 1: A) Which 5 communities in Baltimore experienced the
+highest growth of 16-19 year olds who were either employed or enrolled
+in school? What was the percent change of each?</p>
+<p>To make a new data frame with growth info:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5ncm93dGggPC0gYmFsdF9wb3AgJT4lICNDcmVhdGVzIG5ldyBkYXRhIGZyYW1lXG4gIHNlbGVjdChQbGFjZV8xLCBQbGFjZV8yLCB4MjAxMCwgeDIwMjApICU+JSAjU2VsZWN0cyB3aGljaCBjb2x1bW5zIHdpbGwgYmUgaW4gdGhlIG5ldyBkYXRhIGZyYW1lXG4gIG11dGF0ZShwY3RfY2hhbmdlID0gKCh4MjAyMC14MjAxMCkveDIwMTApKjEwMCkgI0FkZHMgY29sdW1uIGZvciBwZXJjZW50IGNoYW5nZSBhbmQgY2FsY3VsYXRlcyBwZXJjZW50IGNoYW5nZVxuXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5ncm93dGggPC0gYmFsdF9wb3AgJT4lICNDcmVhdGVzIG5ldyBkYXRhIGZyYW1lXG4gIHNlbGVjdChQbGFjZV8xLCBQbGFjZV8yLCB4MjAxMCwgeDIwMjApICU+JSAjU2VsZWN0cyB3aGljaCBjb2x1bW5zIHdpbGwgYmUgaW4gdGhlIG5ldyBkYXRhIGZyYW1lXG4gIG11dGF0ZShwY3RfY2hhbmdlID0gcm91bmQoKCh4MjAyMC14MjAxMCkveDIwMTApKjEwMCwgMikpICNBZGRzIGNvbHVtbiBmb3IgcGVyY2VudCBjaGFuZ2UgYW5kIGNhbGN1bGF0ZXMgdmFsdWVcblxuYGBgIn0= -->
 <pre class="r"><code>
 growth &lt;- balt_pop %&gt;% #Creates new data frame
   select(Place_1, Place_2, x2010, x2020) %&gt;% #Selects which columns will be in the new data frame
-  mutate(pct_change = ((x2020-x2010)/x2010)*100) #Adds column for percent change and calculates percent change
+  mutate(pct_change = round(((x2020-x2010)/x2010)*100, 2)) #Adds column for percent change and calculates value
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -1811,8 +1800,9 @@ growth &lt;- balt_pop %&gt;% #Creates new data frame
 <p>To calculate the 5 communities with the highest growth:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3Jvd3RoICU+JVxuICBncm91cF9ieShQbGFjZV8xKSAlPiVcbiAgc3VtbWFyaXNlKFxuICAgIHBjdF9jaGFuZ2VcbiAgKSAlPiUgXG4gIGFycmFuZ2UoZGVzYyhwY3RfY2hhbmdlKSkgJT4lXG4gIGhlYWQoNSlcbmBgYCJ9 -->
-<pre class="r"><code>growth %&gt;%
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5ncm93dGggJT4lXG4gIGdyb3VwX2J5KFBsYWNlXzEpICU+JVxuICBzdW1tYXJpc2UoXG4gICAgcGN0X2NoYW5nZVxuICApICU+JSBcbiAgYXJyYW5nZShkZXNjKHBjdF9jaGFuZ2UpKSAlPiVcbiAgaGVhZCg1KVxuYGBgIn0= -->
+<pre class="r"><code>
+growth %&gt;%
   group_by(Place_1) %&gt;%
   summarise(
     pct_change
@@ -1820,39 +1810,205 @@ growth &lt;- balt_pop %&gt;% #Creates new data frame
   arrange(desc(pct_change)) %&gt;%
   head(5)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NSwibmNvbCI6Miwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI1IMOXIDIiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFSUFUvQ1FCZytDb1hRQlBCcmNXTndsQkppSWlZdUZVRW5JL0VySkE3a2FFL2FjTnpWNnhYY2RIRTAwVTAzNCtCZmNIRDFUemk0R1ArRkNmVUtkMGJiNGZxOHozUFArM1VIemM2YTBURUFBR21RU1dzZ3JRc0k5T09qbmNvR0FCbE5CQ21RQWZuNGZ5RXVMUW9RazNQeExTbVVEbW5JM1hJRFl1NE5LVU9TWG1wU1pyc280SWhWdHdLM0Z6Sk9pZFRtZHhtQ1FpanZVZUxBOGREN0ZWck9VRkFCSmVVVEQyUFlWOW1XdDEyUG5JZlE5MGk1RGRtZzJrQjRoQndreWdGUWpMdXhUbGV2YjU4dUg2d0crZnA0ZjFteE5qOWY3eGJNc1ZWdndmM24ycjIxL2xoNTAyNnFpYkYwQW9jb2tDTnBrc3kxTWJSUnR5WkR3N2Q1MTNZaEVlMzhkK2NaSFpzcVF5SE9jQ1dPS0lxK2syVnNEQU5WUnBHR0F6azB6NWp3aTJpU3NPU296ejFLaEVtTDE1NU5tRk1zUVpSQ0VuZmlWR3czSklOS1BTR25mZEtQYTA2cDJWZVFXUCtEdFZrWFdpVHRXV25QSXRMM2lIb09IY01ld2lxemcwWVNGc1UrcHVzd2ZlWVJydVlVYkdCeXlxR3lHRGJGaXBsT0RpWS9DR3Brd0lzQ0FBQT0ifQ== -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NSwibmNvbCI6Miwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI1IMOXIDIiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFSdlU4Q01Sd3RCd2ZoRWtBamk0dGhkQkNNTVZFVFkzSWl5R1NDbnlIUmhKUzd5bDBvN2RucmdYRnljZlp2TUhGMmRuYlcyZGs0T2p1WmdDMjBScTdEM2Z1OTEvZjc2bEd0dFc2MUxBQkFFcVNTQmtpYUFnTHo5R1MvdkFWQXloQkJBcVJBVnY2dnhhVUZBU1E1SjI4cG9YQk1JKzZWcWhCenYwOFpVblN4UnBuam9aQWp0cm9iZXAySWNVcVVOdDlnQ0FxaGRFQ0pDNGQ5LzArb3UzMUJoWlNVem55TVlWZG5XOXp6ZkhJVndjQW5wU1prdmRVcXdnUGtJbEVPZ0x6c3hqNWZlUlhuemE3U2krWHZsM3Q3Ky9QZDJna2U3YzM2MHZQaDE1Mjk4ZEI0S3Q1OHhNWXlDZXlqVUkxa0tETFR4TkJCN1RVVldvSEQyNDRIaVdobjFwMWxkRmpSR1hJeXc2MzRqTWZqbjNnWkI4TlFsOUdrNVVJT0s1ZE0rRVUwaWxreU5PQStKY0preUxXblkrWUVpeEdGaU1oTzNMTGpSYVFuMzI5R1RnYWtLMnRPcU9uSktXeit3OGEwQzJPczdHbGxUeVBTOVlsK0RoUEREc0k2czRzR0N1YkZQaWJycUFUTUoxelBLZGl3d2ltSDJtSTVGR3RtTWprWS9RTC82ajNCaXdJQUFBPT0ifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Place_1"],"name":[1],"type":["chr"],"align":["left"]},{"label":["pct_change"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"South Baltimore","2":"108.69565"},{"1":"Dorchester/Ashburton","2":"36.86636"},{"1":"Greater Mondawmin","2":"27.88567"},{"1":"Edmondson Village","2":"23.27102"},{"1":"Chinquapin Park/Belvedere","2":"22.62570"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[5]},"pages":{}}}
+{"columns":[{"label":["Place_1"],"name":[1],"type":["chr"],"align":["left"]},{"label":["pct_change"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"South Baltimore","2":"108.70"},{"1":"Dorchester/Ashburton","2":"36.87"},{"1":"Greater Mondawmin","2":"27.89"},{"1":"Edmondson Village","2":"23.27"},{"1":"Chinquapin Park/Belvedere","2":"22.63"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[5]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
+<pre class="r"><code>NA</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>To calculate the 5 communities with the least growth:</p>
+<ol start="2" style="list-style-type: upper-alpha">
+<li>South Baltimore had the highest growth by a landslide. What
+percentage of 16-19-year-olds were in school or employed in 2010? 2015?
+2020?</li>
+</ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3Jvd3RoICU+JVxuICBncm91cF9ieShQbGFjZV8xKSAlPiVcbiAgc3VtbWFyaXNlKFxuICAgIHBjdF9jaGFuZ2VcbiAgKSAlPiUgXG4gIGFycmFuZ2UocGN0X2NoYW5nZSkgJT4lXG4gIGhlYWQoNSlcbmBgYCJ9 -->
-<pre class="r"><code>growth %&gt;%
-  group_by(Place_1) %&gt;%
-  summarise(
-    pct_change
-  ) %&gt;% 
-  arrange(pct_change) %&gt;%
-  head(5)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5zb3V0aF9iYWx0IDwtIHN1YnNldChiYWx0X3BvcCwgUGxhY2VfMSA9PSBcIlNvdXRoIEJhbHRpbW9yZVwiKVxuXG5zb3V0aF9iYWx0ICU+JSAgXG5zZWxlY3QoUGxhY2VfMSwgeDIwMTAsIHgyMDE1LCB4MjAyMClcbmBgYCJ9 -->
+<pre class="r"><code>
+south_balt &lt;- subset(balt_pop, Place_1 == &quot;South Baltimore&quot;)
+
+south_balt %&gt;%  
+select(Place_1, x2010, x2015, x2020)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NSwibmNvbCI6Miwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI1IMOXIDIiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFSdjA3Q1FCZy9Db1hRQ0pqbzRHSlNINEFXWkdFd0Rnam9KakVZMk1oUlRtaDYzSkhyRmNUSnhNWEpCL0VCblBzZ0RpYnlBaTRzSnRRN3VFYnREWGUvNy9kOXYrL1BmVGZOZnMzb0d3Q0FOTWlrTlpEV0JRVDZiYmRkcmdPUTBZU1JBaG1RbCsrOUNEb1FRSkw3TWtvNWpwcXU0NkhsM01VWTJXMEdpWWRkd3VtQ0tQOWhtekxrYzdNRG1XZjNJQjR5U2ozbE8ybElBeStKZlJFdzd2cG1BeTd0Szdqd1hPS2JIU3J5cU1CQ2Q0TE1IcHdqaGwza0s3SjB5UkFpVXhvUWJyYWd6d1ZWbEkyRjdmcm5pOTAvRFJ1cjgvVTdXNFZuMS9ueTY0Y2VWdGJWNDYrM1ZsanBQenp0UGRjU0Urb0VUa1h1M1hTYUluTWREQjAwcUNyVG1EbDg0RXdnR2FPRU9zL293b296RkdTR1IzRkZVZlNkTE9OZzZNZGxZdElZUVE2dE95YjB3dG9rSkRrNjR5NGxRcVRKRFdRVDRoUkxFS1dBeUU1R1pXY1NFRSt1OHA4N1BTTmpXWE5MN1U1QllmMFAxblpkYUpHU1o1VThpOGpZSlNnZUI4TWh3bkhtRVpvcldCVC9zZjBPYThaKzkyZ0kxcmM0NVRDV0dBN0ZNYk9kSEd4K0FJM1o5SFNXQWdBQSJ9 -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIxIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFRVVVyRFFCQ2RKSnVFQmxvTFhzQUxKS1FWd1U4UnNiK2lGaUlJc2lackc5enVobVNqL1JHOGlXZnhHbDdCYjM5YkorbHVTVE93eVh0djlzM3N6TzFWY2hva0FRQTRRQndiSEJjaHVQUDc2L0FjZ05oSUxDQXdhUDVydkhTTWdPQVpkeEpIZDdKV3k1Tkx5bFcra2lWRGFkU2tMMlovOC9uang4K2VKMS8rOSsrTTd2a0Q2RGpvNHdxNllwWHVRYlRvMzNDYXNxZUp1Yk9leHBPNFM4NDZaQnIzU2c1SytSNlpza004OWlkK3RoajkzaW1ubGVsdHhDQ2ppa1l2SmZxUmJYb1dYeFlxbHdKTmRyTWNyMmUyeXA0d3JrWHpraXhNbDdWNERYR0t3N3hUaUVYVHRKVjJNZFRZNm1DeWU0YTkxWFpQMnowbUZybGdaaDVPbnhrM2xUUDJwdUVJRjlMdUl5cktYQ2d6S0twVnBLU2l4aEtra2h1bEhSMDIvMHhIS01veUFnQUEifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Place_1"],"name":[1],"type":["chr"],"align":["left"]},{"label":["pct_change"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Dickeyville/Franklintown","2":"-44.44444"},{"1":"Forest Park/Walbrook","2":"-37.78317"},{"1":"Brooklyn/Curtis Bay/Hawkins Point","2":"-28.30873"},{"1":"The Waverlies","2":"-16.96169"},{"1":"Greenmount East","2":"-16.34562"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[5]},"pages":{}}}
+{"columns":[{"label":["Place_1"],"name":[1],"type":["chr"],"align":["left"]},{"label":["x2010"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["x2015"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["x2020"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"South Baltimore","2":"47.91667","3":"98.48485","4":"100"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
+<pre class="r"><code>NA</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>By looking at my new south_balt table and visualization, I can see
+that 47.92% of 16-19-year-olds were in school or employed in 2010,
+98.48% in 2015, and 100.00% in 2020. Was this growth gradual, or did it
+happen quickly over a short time period?</p>
+<p>Question 2: Which one-year period showed the highest growth in South
+Baltimore?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5zb3V0aF9iYWx0IDwtIHNvdXRoX2JhbHQgJT4lXG4gIG11dGF0ZShwY3RfY2hhbmdlXzIwMTBfMjAxMSA9IHJvdW5kKCgoeDIwMTEteDIwMTApL3gyMDEwKSoxMDAsIDIpKSAlPiVcbiAgbXV0YXRlKHBjdF9jaGFuZ2VfMjAxMV8yMDEyID0gcm91bmQoKCh4MjAxMi14MjAxMSkveDIwMTEpKjEwMCwgMikpICU+JVxuICBtdXRhdGUocGN0X2NoYW5nZV8yMDEyXzIwMTMgPSByb3VuZCgoKHgyMDEzLXgyMDEyKS94MjAxMikqMTAwLCAyKSkgJT4lXG4gIG11dGF0ZShwY3RfY2hhbmdlXzIwMTNfMjAxNCA9IHJvdW5kKCgoeDIwMTQteDIwMTMpL3gyMDEzKSoxMDAsIDIpKSAlPiVcbiAgbXV0YXRlKHBjdF9jaGFuZ2VfMjAxNF8yMDE1ID0gcm91bmQoKCh4MjAxNS14MjAxNCkveDIwMTQpKjEwMCwgMikpICU+JVxuICBtdXRhdGUocGN0X2NoYW5nZV8yMDE1XzIwMTYgPSByb3VuZCgoKHgyMDE2LXgyMDE1KS94MjAxNSkqMTAwLCAyKSkgJT4lXG4gIG11dGF0ZShwY3RfY2hhbmdlXzIwMTZfMjAxNyA9IHJvdW5kKCgoeDIwMTcteDIwMTYpL3gyMDE2KSoxMDAsIDIpKSAlPiVcbiAgbXV0YXRlKHBjdF9jaGFuZ2VfMjAxN18yMDE4ID0gcm91bmQoKCh4MjAxOC14MjAxNykveDIwMTcpKjEwMCwgMikpICU+JVxuICBtdXRhdGUocGN0X2NoYW5nZV8yMDE4XzIwMTkgPSByb3VuZCgoKHgyMDE5LXgyMDE4KS94MjAxOCkqMTAwLCAyKSkgJT4lXG4gIG11dGF0ZShwY3RfY2hhbmdlXzIwMTlfMjAyMCA9IHJvdW5kKCgoeDIwMjAteDIwMTkpL3gyMDE5KSoxMDAsIDIpKVxuXG5zb3V0aF9iYWx0ICU+JSAgXG4gIHNlbGVjdChwY3RfY2hhbmdlXzIwMTBfMjAxMSwgcGN0X2NoYW5nZV8yMDExXzIwMTIsIHBjdF9jaGFuZ2VfMjAxMl8yMDEzLCBwY3RfY2hhbmdlXzIwMTNfMjAxNCwgcGN0X2NoYW5nZV8yMDE0XzIwMTUsIHBjdF9jaGFuZ2VfMjAxNV8yMDE2LCBwY3RfY2hhbmdlXzIwMTZfMjAxNywgcGN0X2NoYW5nZV8yMDE3XzIwMTgsIHBjdF9jaGFuZ2VfMjAxOF8yMDE5LCBwY3RfY2hhbmdlXzIwMTlfMjAyMClcbmBgYCJ9 -->
+<pre class="r"><code>
+south_balt &lt;- south_balt %&gt;%
+  mutate(pct_change_2010_2011 = round(((x2011-x2010)/x2010)*100, 2)) %&gt;%
+  mutate(pct_change_2011_2012 = round(((x2012-x2011)/x2011)*100, 2)) %&gt;%
+  mutate(pct_change_2012_2013 = round(((x2013-x2012)/x2012)*100, 2)) %&gt;%
+  mutate(pct_change_2013_2014 = round(((x2014-x2013)/x2013)*100, 2)) %&gt;%
+  mutate(pct_change_2014_2015 = round(((x2015-x2014)/x2014)*100, 2)) %&gt;%
+  mutate(pct_change_2015_2016 = round(((x2016-x2015)/x2015)*100, 2)) %&gt;%
+  mutate(pct_change_2016_2017 = round(((x2017-x2016)/x2016)*100, 2)) %&gt;%
+  mutate(pct_change_2017_2018 = round(((x2018-x2017)/x2017)*100, 2)) %&gt;%
+  mutate(pct_change_2018_2019 = round(((x2019-x2018)/x2018)*100, 2)) %&gt;%
+  mutate(pct_change_2019_2020 = round(((x2020-x2019)/x2019)*100, 2))
+
+south_balt %&gt;%  
+  select(pct_change_2010_2011, pct_change_2011_2012, pct_change_2012_2013, pct_change_2013_2014, pct_change_2014_2015, pct_change_2015_2016, pct_change_2016_2017, pct_change_2017_2018, pct_change_2018_2019, pct_change_2019_2020)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6MTAsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMSDDlyAxMCJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUF3dHlpVERtaXVCaVlHQmdabUJoWm1KZ1pnVXlHVmhEUTl4MExSZ1lXSmlBSEVZR0ZnWk9FRjBCVkNRTVpJQlU4NEVFSEFUVHdBREdQMkQ1VHFUcW9mczZ1SHpJVjdrZGdhOWI0WHl0US8weEdsOFB3L25XVTBES1JXRDgvWmV2YzlrV0xMNE80OXNmV0F3U1dBTG4vMjVGTVk4QkFkRDRLQTVuelV2TVRTMEdNZ1RBam9jSWloUWtsOFFuWnlUbXBhZkdHeGtZR29BSVEreHloaURDQ0x1Y0VZZ3d4aTVuRENKTXNNdVpnQWhUN0hLbUlNSU11NXdaaURESExtY09JaXl3eTFtQUNFdnNjcFpBd3NnQUxkQTRpL0xMOVdBQnh3dkVUQTFBNGo4UW9JZHVjazVpTVN4MFlZSmNLWWtsaVhwcFJVRDlRTjQvTkMzcytRVWxtZmw1UUUxTW9QVEVocWFac1FoTmdMODBEK1NTRk4za2pOSzhiRjFUTkdubWdyeDBhTEtFSlFGZUtKc1JpYzBGY1FYVGY2aDJOcWgydHRTODlNeThWSmgzY2hLVFVuTmdKcWVrbGtHWmZNRHdBQWVIWGtGUlpsNEp6SjlBMFdLOWt2eVNSSmdXcnVUOEhKZ0kyT2NNL3dBaU9ob0ZaQU1BQUE9PSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["pct_change_2010_2011"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["pct_change_2011_2012"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["pct_change_2012_2013"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["pct_change_2013_2014"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["pct_change_2014_2015"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["pct_change_2015_2016"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["pct_change_2016_2017"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["pct_change_2017_2018"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["pct_change_2018_2019"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["pct_change_2019_2020"],"name":[10],"type":["dbl"],"align":["right"]}],"data":[{"1":"4.35","2":"-25.93","3":"83.83","4":"13.38","5":"27.58","6":"-0.31","7":"0.13","8":"1.72","9":"0","10":"0"}],"options":{"columns":{"min":{},"max":[10],"total":[10]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
+<pre class="r"><code>NA</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>As we can see from this table, 2012-2013 experienced the highest
+growth of 16-19-year-olds in school or employed at 83.83%.</p>
+<p>Question 3: A) Looking at the south_balt table, when was the
+percentage of 16-19-year-olds in school or employed in South Baltimore
+at or below 50%?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5zb3V0aF9iYWx0ICU+JVxuICBzZWxlY3QoeDIwMTAsIHgyMDExLCB4MjAxMiwgeDIwMTMsIHgyMDE0LCB4MjAxNSwgeDIwMTYsIHgyMDE3LCB4MjAxOCwgeDIwMTksIHgyMDIwKVxuYGBgIn0= -->
+<pre class="r"><code>
+south_balt %&gt;%
+  select(x2010, x2011, x2012, x2013, x2014, x2015, x2016, x2017, x2018, x2019, x2020)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6MTEsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMSDDlyAxMSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUF3dHlpVERtaXVCaVlHQmdabUJoWm1KZ1pnVXlHVmhEUTl4MExSZ1lXSmlBSEVZR0ZnWk9FRjBCVkNRTVpIQURNUjlJd01IOWEyaG9UTzB0T04rVEFRWWdmS2VXdlF0Tmo1ckErWUdzUlVuc0czL0QrY0Ura1plbFptNkI4eVBtc3g5ODdaNkk0SGN2ZXJIRDZnaUNQN210U2Y5REo1d2ZpV1lmVGo2S1IxanpFbk5UaTRFTUFiQm5vSUlWUmdhR0JzZ2NRMlNPRVRMSEdKbGpnc3d4UmVhWUlYUE1rVGtXeUJ4TEpJNlJBWnBiT1l2eXkvVmc3dVVGWXFZR0lQRWZDTkE5bFp5VFdBenpGRXlRS3lXeEpGRXZyUWlvSDhqN2g2YUZQYitnSkRNL0Q2aUpDUlN0YkdpYUdZdlFCUGhMODBBdVNkRk56aWpOeTlZMVE1Tm1Mc2hMQjlrSkZvSUFYaWliRVluTkRYRUYwMytvZGphb2RyYlV2UFRNdkZTWWQzSVNrMUp6WUNhbnBKWkJtWHpBOEFBSGgxNUJVV1plQ2N5ZlFORml2Wkw4a2tTWUZxN2svQnlZQ05qbkRQOEFkclJOcmVzQ0FBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["x2010"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["x2011"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["x2012"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["x2013"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["x2014"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["x2015"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["x2016"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["x2017"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["x2018"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["x2019"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["x2020"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"47.91667","2":"50","3":"37.03704","4":"68.08511","5":"77.19298","6":"98.48485","7":"98.18182","8":"98.30508","9":"100","10":"100","11":"100"}],"options":{"columns":{"min":{},"max":[10],"total":[11]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
+<pre class="r"><code>NA</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>We can see from this table that the percentage of 16-19-year-olds in
+school or employed in South Baltimore was at or below 50% in 2010, 2011,
+and 2012.</p>
+<ol start="2" style="list-style-type: upper-alpha">
+<li>How do these values compare to Baltimore’s averages during these
+years?</li>
+</ol>
+<p>First, I will organize the mean values of 2010, 2011, and 2012.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4gIGJhbHRfbWVhbnMgPC0gY29sTWVhbnMoc2VsZWN0KGJhbHRfcG9wLCB4MjAxMCwgeDIwMTEsIHgyMDEyKSwgbmEucm0gPSBUUlVFKVxuICB0aWJibGUoWWVhciA9IGMoXCJ4MjAxMFwiLCBcIngyMDExXCIsIFwieDIwMTJcIiksIE1lYW4gPSBiYWx0X21lYW5zKVxuYGBgIn0= -->
+<pre class="r"><code>
+  balt_means &lt;- colMeans(select(balt_pop, x2010, x2011, x2012), na.rm = TRUE)
+  tibble(Year = c(&quot;x2010&quot;, &quot;x2011&quot;, &quot;x2012&quot;), Mean = balt_means)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Miwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIzIMOXIDIiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTJRdjA3RE1CREdyODRmMUVndFNNdzhRa3hiaHJLUkFiR3hBQkZsTklrcEVjRUpUZ29kS3g0QWlaMDNZT09OMkZrWmFUZ250aFRaZy8zZDUvdmQrWHh4dWpnS0ZnRUFPT0E2QkJ3UEpYangxVmw0RE9BU0RBYmd3bENkYTB6YVI2SE12WTVvTDd6MWJES2Q5SU5wUDVpaEdLdjBLS1pmSngvdjMxRjhlZkQ3OUhNWXhadjUyK3ZudGRYSEUreVJWN29IMGFaN3c1azArcHd6WVVGRFdieFFBNDRVdU1HdGFaby91M3FTczhwVU4yYVFzcHJSTzRrOFJsc0wyU25LT2lzRVFrU043MXZ3UUZyRzdrcW9sNlJoY3I4U0QrSGN1blpLc1ZROVc2dGJJNjJkbmliZEswaWpjVi9qUGhmTFRIQXpUczV1ZVc0cXAveFp5ekgrUi9zZHRKU1pxTTJjNkZhMExtcG1rQ0FwY3VPMGs4UDJIMG1ZQTJrVEFnQUEifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Year"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Mean"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"x2010","2":"84.72963"},{"1":"x2011","2":"85.29870"},{"1":"x2012","2":"86.00339"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
+<pre class="r"><code>NA</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Now, I will look at the South Baltimore values again on their
+own…</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5zb3V0aF9iYWx0ICU+JVxuICBzZWxlY3QoeDIwMTAsIHgyMDExLCB4MjAxMilcbmBgYCJ9 -->
+<pre class="r"><code>
+south_balt %&gt;%
+  select(x2010, x2011, x2012)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Mywic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIxIMOXIDMiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBd3R5aVREbWl1QmlZR0JnWm1CaFptSmdaZ1V5R1ZoRFE5eDBMUmdZV0ppQUhFWUdGZ1pPRUYwQlZDUU1Wc25Bd0FjU2NIRC9HaG9hVTNzTHp2ZGtnQUVJMzZsbDcwTFRveVpvQnJIbUplYW1GZ01aQWhCcklZSVZSZ2FHQnNnY1EyU09FWm9abkVYNTVYb3djM2lCbUtrQlNQd0hBblRMa25NU2kyR1d3UVM1VWhKTEV2WFNpb0Q2Z2J4L2FGclk4d3RLTXZQemdKcVlRTjVsUTlQTVdJUW13RithQjNKSmltNXlSbWxlTmlqY1VLU1pDL0xTUVhhQ2hTQ0FGOHBtUkdJelExekI5QitxblEycW5TMDFMejB6THhYbW5aekVwTlFjbU1rcHFXVlFKaDh3UE1EQm9WZFFsSmxYQXZNblVMUllyeVMvSkJHbWhTczVQd2NtQXZZNXd6OEFPVXg2cEFNQ0FBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["x2010"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["x2011"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["x2012"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"47.91667","2":"50","3":"37.03704"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
+<pre class="r"><code>NA</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>…assign some values…</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jMjAxMFxuc291dGhfYmFsdF8yMDEwIDwtIDQ3LjkyXG5tZWFuXzIwMTAgPC0gODQuNzNcblxuIzIwMTFcbnNvdXRoX2JhbHRfMjAxMSA8LSA1MC4wMFxubWVhbl8yMDExIDwtIDg1LjMwXG5cbiMyMDEyXG5zb3V0aF9iYWx0XzIwMTIgPC0gMzcuMDRcbm1lYW5fMjAxMiA8LSA4Ni4wMFxuXG5gYGAifQ== -->
+<pre class="r"><code>
+#2010
+south_balt_2010 &lt;- 47.92
+mean_2010 &lt;- 84.73
+
+#2011
+south_balt_2011 &lt;- 50.00
+mean_2011 &lt;- 85.30
+
+#2012
+south_balt_2012 &lt;- 37.04
+mean_2012 &lt;- 86.00
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>…and do some math.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWVhbl8yMDEwLXNvdXRoX2JhbHRfMjAxMFxuYGBgIn0= -->
+<pre class="r"><code>mean_2010-south_balt_2010</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDM2LjgxXG4ifQ== -->
+<pre><code>[1] 36.81</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWVhbl8yMDExLXNvdXRoX2JhbHRfMjAxMVxuYGBgIn0= -->
+<pre class="r"><code>mean_2011-south_balt_2011</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDM1LjNcbiJ9 -->
+<pre><code>[1] 35.3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWVhbl8yMDEyLXNvdXRoX2JhbHRfMjAxMlxuYGBgIn0= -->
+<pre class="r"><code>mean_2012-south_balt_2012</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDQ4Ljk2XG4ifQ== -->
+<pre><code>[1] 48.96</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>And now we see how far South Baltimore’s 2010-12 percentages were
+below Baltimore’s mean values.</p>
+<p>In conclusion, 2010-2012 was a major low point for the community of
+South Baltimore compared to Baltimore as a whole in terms of how many
+16-19-year-olds were in school or employed. On the other hand, 2012-2013
+showed amazing growth.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQXNzaWdubWVudCAxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpUbyBsb2FkIHRoZSBuZWNlc3NhcnkgcGFja2FnZXM6CgpgYGB7cn0KCmxpYnJhcnkgKHRpZHl2ZXJzZSkKbGlicmFyeSAocm1hcmtkb3duKQpsaWJyYXJ5IChqYW5pdG9yKQpsaWJyYXJ5IChnZ3Bsb3QyKQpsaWJyYXJ5IChnZ3RoZW1lcykKbGlicmFyeSAoZHBseXIpCgojIEFzc3VtaW5nIHRoZXNlIHBhY2thZ2VzIGFyZSBhbHJlYWR5IGluc3RhbGxlZC4KIyBBc3N1bWluZyBiYXNlLCBkYXRhc2V0cywgZm9yY2F0cywgZ3JhcGhpY3MsIHB1cnJyLCByZWFkciwgYW5kIHN0YXRzIGFyZSBhbHJlYWR5IGluc3RhbGxlZCBhbmQgbG9hZGVkLgoKYGBgCgpUbyBsb2FkIGFuZCB2aWV3IHRoZSBuZWNlc3NhcnkgZGF0YToKCmBgYHtyfQoKYmFsdF9wb3AgPC0gcmVhZF9jc3YoImJhbHRfcG9wXzE2XzE5LmNzdiIpCnZpZXcoYmFsdF9wb3ApCgpgYGAKCkZvciBlYWNoIHllYXIsIHRoZSB2YWx1ZXMgYmVsb3cgYXJlIHRoZSBwZXJjZW50IG9mIDE2LTE5LXllYXItb2xkcyBpbiBCYWx0aW1vcmUgd2hvIGFyZSBlaXRoZXIgZW5yb2xsZWQgaW4gc2Nob29sIG9yIGVtcGxveWVkLgoKUXVlc3Rpb24gMToKV2hpY2ggNSBjb21tdW5pdGllcyBpbiBCYWx0aW1vcmUgZXhwZXJpZW5jZWQgdGhlIGhpZ2hlc3QgZ3Jvd3RoIG9mIDE2LTE5IHllYXIgb2xkcyB3aG8gd2VyZSBlaXRoZXIgZW1wbG95ZWQgb3IgZW5yb2xsZWQgaW4gc2Nob29sPyBXaGljaCA1IGV4cGVyaWVuY2VkIHRoZSBsZWFzdCBncm93dGggKGxhcmdlc3QgZGVjcmVhc2UpPyBXaGF0IHdhcyB0aGUgcGVyY2VudCBjaGFuZ2Ugb2YgZWFjaD8KCmBgYHtyfQoKZ3Jvd3RoIDwtIGJhbHRfcG9wICU+JSAjQ3JlYXRlcyBuZXcgZGF0YSBmcmFtZQogIHNlbGVjdChQbGFjZV8xLCBQbGFjZV8yLCB4MjAxMCwgeDIwMjApICU+JSAjU2VsZWN0cyB3aGljaCBjb2x1bW5zIHdpbGwgYmUgaW4gdGhlIG5ldyBkYXRhIGZyYW1lCiAgbXV0YXRlKHBjdF9jaGFuZ2UgPSAoKHgyMDIwLXgyMDEwKS94MjAxMCkqMTAwKSAjQWRkcyBjb2x1bW4gZm9yIHBlcmNlbnQgY2hhbmdlIGFuZCBjYWxjdWxhdGVzIHBlcmNlbnQgY2hhbmdlCgpgYGAKClRvIGNhbGN1bGF0ZSB0aGUgNSBjb21tdW5pdGllcyB3aXRoIHRoZSBoaWdoZXN0IGdyb3d0aDoKYGBge3J9Cmdyb3d0aCAlPiUKICBncm91cF9ieShQbGFjZV8xKSAlPiUKICBzdW1tYXJpc2UoCiAgICBwY3RfY2hhbmdlCiAgKSAlPiUgCiAgYXJyYW5nZShkZXNjKHBjdF9jaGFuZ2UpKSAlPiUKICBoZWFkKDUpCmBgYApUbyBjYWxjdWxhdGUgdGhlIDUgY29tbXVuaXRpZXMgd2l0aCB0aGUgbGVhc3QgZ3Jvd3RoOgpgYGB7cn0KZ3Jvd3RoICU+JQogIGdyb3VwX2J5KFBsYWNlXzEpICU+JQogIHN1bW1hcmlzZSgKICAgIHBjdF9jaGFuZ2UKICApICU+JSAKICBhcnJhbmdlKHBjdF9jaGFuZ2UpICU+JQogIGhlYWQoNSkKYGBgCgoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQXNzaWdubWVudCAxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpUbyBsb2FkIHRoZSBuZWNlc3NhcnkgcGFja2FnZXM6CgpgYGB7cn0KCmxpYnJhcnkgKHRpZHl2ZXJzZSkKbGlicmFyeSAocm1hcmtkb3duKQpsaWJyYXJ5IChqYW5pdG9yKQpsaWJyYXJ5IChnZ3Bsb3QyKQpsaWJyYXJ5IChnZ3RoZW1lcykKbGlicmFyeSAoZHBseXIpCgojIEFzc3VtaW5nIHRoZXNlIHBhY2thZ2VzIGFyZSBhbHJlYWR5IGluc3RhbGxlZC4KIyBBc3N1bWluZyBiYXNlLCBkYXRhc2V0cywgZm9yY2F0cywgZ3JhcGhpY3MsIHB1cnJyLCByZWFkciwgYW5kIHN0YXRzIGFyZSBhbHJlYWR5IGluc3RhbGxlZCBhbmQgbG9hZGVkLgoKYGBgCgpUbyBsb2FkIHRoZSBuZWNlc3NhcnkgZGF0YToKCmBgYHtyfQoKYmFsdF9wb3AgPC0gcmVhZF9jc3YoImJhbHRfcG9wXzE2XzE5LmNzdiIpCgpgYGAKCkZvciBlYWNoIHllYXIsIHRoZSB2YWx1ZXMgYmVsb3cgYXJlIHRoZSBwZXJjZW50IG9mIDE2LTE5LXllYXItb2xkcyBpbiBCYWx0aW1vcmUgd2hvIGFyZSBlaXRoZXIgZW5yb2xsZWQgaW4gc2Nob29sIG9yIGVtcGxveWVkLgoKUXVlc3Rpb24gMTogQSkgV2hpY2ggNSBjb21tdW5pdGllcyBpbiBCYWx0aW1vcmUgZXhwZXJpZW5jZWQgdGhlIGhpZ2hlc3QgZ3Jvd3RoIG9mIDE2LTE5IHllYXIgb2xkcyB3aG8gd2VyZSBlaXRoZXIgZW1wbG95ZWQgb3IgZW5yb2xsZWQgaW4gc2Nob29sPyBXaGF0IHdhcyB0aGUgcGVyY2VudCBjaGFuZ2Ugb2YgZWFjaD8KClRvIG1ha2UgYSBuZXcgZGF0YSBmcmFtZSB3aXRoIGdyb3d0aCBpbmZvOgoKYGBge3J9Cgpncm93dGggPC0gYmFsdF9wb3AgJT4lCiAgc2VsZWN0KFBsYWNlXzEsIFBsYWNlXzIsIHgyMDEwLCB4MjAyMCkgJT4lCiAgbXV0YXRlKHBjdF9jaGFuZ2UgPSByb3VuZCgoKHgyMDIwLXgyMDEwKS94MjAxMCkqMTAwLCAyKSkKCmBgYAoKVG8gY2FsY3VsYXRlIHRoZSA1IGNvbW11bml0aWVzIHdpdGggdGhlIGhpZ2hlc3QgZ3Jvd3RoOgoKYGBge3J9Cgpncm93dGggJT4lCiAgZ3JvdXBfYnkoUGxhY2VfMSkgJT4lCiAgc3VtbWFyaXNlKAogICAgcGN0X2NoYW5nZQogICkgJT4lIAogIGFycmFuZ2UoZGVzYyhwY3RfY2hhbmdlKSkgJT4lCiAgaGVhZCg1KQoKYGBgCgpCKSAgU291dGggQmFsdGltb3JlIGhhZCB0aGUgaGlnaGVzdCBncm93dGggYnkgYSBsYW5kc2xpZGUuIFdoYXQgcGVyY2VudGFnZSBvZiAxNi0xOS15ZWFyLW9sZHMgd2VyZSBpbiBzY2hvb2wgb3IgZW1wbG95ZWQgaW4gMjAxMD8gMjAxNT8gMjAyMD8KCmBgYHtyfQoKc291dGhfYmFsdCA8LSBzdWJzZXQoYmFsdF9wb3AsIFBsYWNlXzEgPT0gIlNvdXRoIEJhbHRpbW9yZSIpCgpzb3V0aF9iYWx0ICU+JSAgCnNlbGVjdChQbGFjZV8xLCB4MjAxMCwgeDIwMTUsIHgyMDIwKQoKYGBgCgpCeSBsb29raW5nIGF0IG15IG5ldyBzb3V0aF9iYWx0IHRhYmxlIGFuZCB2aXN1YWxpemF0aW9uLCBJIGNhbiBzZWUgdGhhdCA0Ny45MiUgb2YgMTYtMTkteWVhci1vbGRzIHdlcmUgaW4gc2Nob29sIG9yIGVtcGxveWVkIGluIDIwMTAsIDk4LjQ4JSBpbiAyMDE1LCBhbmQgMTAwLjAwJSBpbiAyMDIwLiBXYXMgdGhpcyBncm93dGggZ3JhZHVhbCwgb3IgZGlkIGl0IGhhcHBlbiBxdWlja2x5IG92ZXIgYSBzaG9ydCB0aW1lIHBlcmlvZD8KClF1ZXN0aW9uIDI6IFdoaWNoIG9uZS15ZWFyIHBlcmlvZCBzaG93ZWQgdGhlIGhpZ2hlc3QgZ3Jvd3RoIGluIFNvdXRoIEJhbHRpbW9yZT8KCmBgYHtyfQoKc291dGhfYmFsdCA8LSBzb3V0aF9iYWx0ICU+JQogIG11dGF0ZShwY3RfY2hhbmdlXzIwMTBfMjAxMSA9IHJvdW5kKCgoeDIwMTEteDIwMTApL3gyMDEwKSoxMDAsIDIpKSAlPiUKICBtdXRhdGUocGN0X2NoYW5nZV8yMDExXzIwMTIgPSByb3VuZCgoKHgyMDEyLXgyMDExKS94MjAxMSkqMTAwLCAyKSkgJT4lCiAgbXV0YXRlKHBjdF9jaGFuZ2VfMjAxMl8yMDEzID0gcm91bmQoKCh4MjAxMy14MjAxMikveDIwMTIpKjEwMCwgMikpICU+JQogIG11dGF0ZShwY3RfY2hhbmdlXzIwMTNfMjAxNCA9IHJvdW5kKCgoeDIwMTQteDIwMTMpL3gyMDEzKSoxMDAsIDIpKSAlPiUKICBtdXRhdGUocGN0X2NoYW5nZV8yMDE0XzIwMTUgPSByb3VuZCgoKHgyMDE1LXgyMDE0KS94MjAxNCkqMTAwLCAyKSkgJT4lCiAgbXV0YXRlKHBjdF9jaGFuZ2VfMjAxNV8yMDE2ID0gcm91bmQoKCh4MjAxNi14MjAxNSkveDIwMTUpKjEwMCwgMikpICU+JQogIG11dGF0ZShwY3RfY2hhbmdlXzIwMTZfMjAxNyA9IHJvdW5kKCgoeDIwMTcteDIwMTYpL3gyMDE2KSoxMDAsIDIpKSAlPiUKICBtdXRhdGUocGN0X2NoYW5nZV8yMDE3XzIwMTggPSByb3VuZCgoKHgyMDE4LXgyMDE3KS94MjAxNykqMTAwLCAyKSkgJT4lCiAgbXV0YXRlKHBjdF9jaGFuZ2VfMjAxOF8yMDE5ID0gcm91bmQoKCh4MjAxOS14MjAxOCkveDIwMTgpKjEwMCwgMikpICU+JQogIG11dGF0ZShwY3RfY2hhbmdlXzIwMTlfMjAyMCA9IHJvdW5kKCgoeDIwMjAteDIwMTkpL3gyMDE5KSoxMDAsIDIpKQoKc291dGhfYmFsdCAlPiUgIAogIHNlbGVjdChwY3RfY2hhbmdlXzIwMTBfMjAxMSwgcGN0X2NoYW5nZV8yMDExXzIwMTIsIHBjdF9jaGFuZ2VfMjAxMl8yMDEzLCBwY3RfY2hhbmdlXzIwMTNfMjAxNCwgcGN0X2NoYW5nZV8yMDE0XzIwMTUsIHBjdF9jaGFuZ2VfMjAxNV8yMDE2LCBwY3RfY2hhbmdlXzIwMTZfMjAxNywgcGN0X2NoYW5nZV8yMDE3XzIwMTgsIHBjdF9jaGFuZ2VfMjAxOF8yMDE5LCBwY3RfY2hhbmdlXzIwMTlfMjAyMCkKCmBgYAoKQXMgd2UgY2FuIHNlZSBmcm9tIHRoaXMgdGFibGUsIDIwMTItMjAxMyBleHBlcmllbmNlZCB0aGUgaGlnaGVzdCBncm93dGggb2YgMTYtMTkteWVhci1vbGRzIGluIHNjaG9vbCBvciBlbXBsb3llZCBhdCA4My44MyUuCgpRdWVzdGlvbiAzOiBBKSBMb29raW5nIGF0IHRoZSBzb3V0aF9iYWx0IHRhYmxlLCB3aGVuIHdhcyB0aGUgcGVyY2VudGFnZSBvZiAxNi0xOS15ZWFyLW9sZHMgaW4gc2Nob29sIG9yIGVtcGxveWVkIGluIFNvdXRoIEJhbHRpbW9yZSBhdCBvciBiZWxvdyA1MCU/CgpgYGB7cn0KCnNvdXRoX2JhbHQgJT4lCiAgc2VsZWN0KHgyMDEwLCB4MjAxMSwgeDIwMTIsIHgyMDEzLCB4MjAxNCwgeDIwMTUsIHgyMDE2LCB4MjAxNywgeDIwMTgsIHgyMDE5LCB4MjAyMCkKCmBgYAoKV2UgY2FuIHNlZSBmcm9tIHRoaXMgdGFibGUgdGhhdCB0aGUgcGVyY2VudGFnZSBvZiAxNi0xOS15ZWFyLW9sZHMgaW4gc2Nob29sIG9yIGVtcGxveWVkIGluIFNvdXRoIEJhbHRpbW9yZSB3YXMgYXQgb3IgYmVsb3cgNTAlIGluIDIwMTAsIDIwMTEsIGFuZCAyMDEyLgoKQikgIEhvdyBkbyB0aGVzZSB2YWx1ZXMgY29tcGFyZSB0byBCYWx0aW1vcmUncyBhdmVyYWdlcyBkdXJpbmcgdGhlc2UgeWVhcnM/CgpGaXJzdCwgSSB3aWxsIG9yZ2FuaXplIHRoZSBtZWFuIHZhbHVlcyBvZiAyMDEwLCAyMDExLCBhbmQgMjAxMi4KCmBgYHtyfQoKICBiYWx0X21lYW5zIDwtIGNvbE1lYW5zKHNlbGVjdChiYWx0X3BvcCwgeDIwMTAsIHgyMDExLCB4MjAxMiksIG5hLnJtID0gVFJVRSkKICB0aWJibGUoWWVhciA9IGMoIngyMDEwIiwgIngyMDExIiwgIngyMDEyIiksIE1lYW4gPSBiYWx0X21lYW5zKQoKYGBgCgpOb3csIEkgd2lsbCBsb29rIGF0IHRoZSBTb3V0aCBCYWx0aW1vcmUgdmFsdWVzIGFnYWluIG9uIHRoZWlyIG93bi4uLgoKYGBge3J9Cgpzb3V0aF9iYWx0ICU+JQogIHNlbGVjdCh4MjAxMCwgeDIwMTEsIHgyMDEyKQoKYGBgCgouLi5hc3NpZ24gc29tZSB2YWx1ZXMuLi4KCmBgYHtyfQoKIzIwMTAKc291dGhfYmFsdF8yMDEwIDwtIDQ3LjkyCm1lYW5fMjAxMCA8LSA4NC43MwoKIzIwMTEKc291dGhfYmFsdF8yMDExIDwtIDUwLjAwCm1lYW5fMjAxMSA8LSA4NS4zMAoKIzIwMTIKc291dGhfYmFsdF8yMDEyIDwtIDM3LjA0Cm1lYW5fMjAxMiA8LSA4Ni4wMAoKYGBgCgouLi5hbmQgZG8gc29tZSBtYXRoLgoKYGBge3J9Cm1lYW5fMjAxMC1zb3V0aF9iYWx0XzIwMTAKbWVhbl8yMDExLXNvdXRoX2JhbHRfMjAxMQptZWFuXzIwMTItc291dGhfYmFsdF8yMDEyCmBgYAoKQW5kIG5vdyB3ZSBzZWUgaG93IGZhciBTb3V0aCBCYWx0aW1vcmUncyAyMDEwLTEyIHBlcmNlbnRhZ2VzIHdlcmUgYmVsb3cgQmFsdGltb3JlJ3MgbWVhbiB2YWx1ZXMuCgpJbiBjb25jbHVzaW9uLCAyMDEwLTIwMTIgd2FzIGEgbWFqb3IgbG93IHBvaW50IGZvciB0aGUgY29tbXVuaXR5IG9mIFNvdXRoIEJhbHRpbW9yZSBjb21wYXJlZCB0byBCYWx0aW1vcmUgYXMgYSB3aG9sZSBpbiB0ZXJtcyBvZiBob3cgbWFueSAxNi0xOS15ZWFyLW9sZHMgd2VyZSBpbiBzY2hvb2wgb3IgZW1wbG95ZWQuIE9uIHRoZSBvdGhlciBoYW5kLCAyMDEyLTIwMTMgc2hvd2VkIGFtYXppbmcgZ3Jvd3RoLgo=</div>
 
 
 
