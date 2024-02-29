@@ -1752,9 +1752,41 @@ display: none;
 
 
 <!-- rnb-text-begin -->
+<p>To load the necessary packages:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5saWJyYXJ5ICh0aWR5dmVyc2UpXG5saWJyYXJ5IChybWFya2Rvd24pXG5saWJyYXJ5IChqYW5pdG9yKVxubGlicmFyeSAoZ2dwbG90MilcbmxpYnJhcnkgKGdndGhlbWVzKVxubGlicmFyeSAoZHBseXIpXG5cbiMgQXNzdW1pbmcgdGhlc2UgcGFja2FnZXMgYXJlIGFscmVhZHkgaW5zdGFsbGVkLlxuIyBBc3N1bWluZyBiYXNlLCBkYXRhc2V0cywgZm9yY2F0cywgZ3JhcGhpY3MsIHB1cnJyLCByZWFkciwgYW5kIHN0YXRzIGFyZSBhbHJlYWR5IGluc3RhbGxlZCBhbmQgbG9hZGVkLlxuXG5gYGAifQ== -->
+<pre class="r"><code>
+library (tidyverse)
+library (rmarkdown)
+library (janitor)
+library (ggplot2)
+library (ggthemes)
+library (dplyr)
+
+# Assuming these packages are already installed.
+# Assuming base, datasets, forcats, graphics, purrr, readr, and stats are already installed and loaded.
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>To load and view the necessary data:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5iYWx0X3BvcCA8LSByZWFkX2NzdihcImJhbHRfcG9wXzE2XzE5LmNzdlwiKVxudmlldyhiYWx0X3BvcClcblxuYGBgIn0= -->
+<pre class="r"><code>
+balt_pop &lt;- read_csv(&quot;balt_pop_16_19.csv&quot;)
+view(balt_pop)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>For each year, the values below are the percent of 16-19-year-olds in
+Baltimore who are either enrolled in school or employed.</p>
+<p>Question 1:</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQXNzaWdubWVudCAxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQXNzaWdubWVudCAxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpUbyBsb2FkIHRoZSBuZWNlc3NhcnkgcGFja2FnZXM6CgpgYGB7cn0KCmxpYnJhcnkgKHRpZHl2ZXJzZSkKbGlicmFyeSAocm1hcmtkb3duKQpsaWJyYXJ5IChqYW5pdG9yKQpsaWJyYXJ5IChnZ3Bsb3QyKQpsaWJyYXJ5IChnZ3RoZW1lcykKbGlicmFyeSAoZHBseXIpCgojIEFzc3VtaW5nIHRoZXNlIHBhY2thZ2VzIGFyZSBhbHJlYWR5IGluc3RhbGxlZC4KIyBBc3N1bWluZyBiYXNlLCBkYXRhc2V0cywgZm9yY2F0cywgZ3JhcGhpY3MsIHB1cnJyLCByZWFkciwgYW5kIHN0YXRzIGFyZSBhbHJlYWR5IGluc3RhbGxlZCBhbmQgbG9hZGVkLgoKYGBgCgpUbyBsb2FkIGFuZCB2aWV3IHRoZSBuZWNlc3NhcnkgZGF0YToKCmBgYHtyfQoKYmFsdF9wb3AgPC0gcmVhZF9jc3YoImJhbHRfcG9wXzE2XzE5LmNzdiIpCnZpZXcoYmFsdF9wb3ApCgpgYGAKCkZvciBlYWNoIHllYXIsIHRoZSB2YWx1ZXMgYmVsb3cgYXJlIHRoZSBwZXJjZW50IG9mIDE2LTE5LXllYXItb2xkcyBpbiBCYWx0aW1vcmUgd2hvIGFyZSBlaXRoZXIgZW5yb2xsZWQgaW4gc2Nob29sIG9yIGVtcGxveWVkLgoKUXVlc3Rpb24gMToK</div>
 
 
 

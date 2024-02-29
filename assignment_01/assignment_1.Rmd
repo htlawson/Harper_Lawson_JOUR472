@@ -3,3 +3,41 @@ title: "Assignment 1"
 output: html_notebook
 ---
 
+To load the necessary packages:
+
+```{r}
+
+library (tidyverse)
+library (rmarkdown)
+library (janitor)
+library (ggplot2)
+library (ggthemes)
+library (dplyr)
+
+# Assuming these packages are already installed.
+# Assuming base, datasets, forcats, graphics, purrr, readr, and stats are already installed and loaded.
+
+```
+
+To load and view the necessary data:
+
+```{r}
+
+balt_pop <- read_csv("balt_pop_16_19.csv")
+view(balt_pop)
+
+```
+
+For each year, the values below are the percent of 16-19-year-olds in Baltimore who are either enrolled in school or employed.
+
+Question 1:
+
+
+```{r}
+
+pct_change <- balt_pop %>% 
+  select(place, x2010_black, x2010_total, x2020_black, x2020_total) %>%
+  mutate(pct_change = (x2010_black/x2010_total)*100) %>%
+
+```
+
