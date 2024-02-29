@@ -1773,20 +1773,86 @@ library (dplyr)
 <p>To load and view the necessary data:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5iYWx0X3BvcCA8LSByZWFkX2NzdihcImJhbHRfcG9wXzE2XzE5LmNzdlwiKVxudmlldyhiYWx0X3BvcClcblxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5iYWx0X3BvcCA8LSByZWFkX2NzdihcImJhbHRfcG9wXzE2XzE5LmNzdlwiKVxuYGBgIn0= -->
 <pre class="r"><code>
-balt_pop &lt;- read_csv(&quot;balt_pop_16_19.csv&quot;)
-view(balt_pop)
+balt_pop &lt;- read_csv(&quot;balt_pop_16_19.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNTUgQ29sdW1uczogMTbilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgICgyKTogUGxhY2VfMSwgUGxhY2VfMlxuZGJsICgxNCk6IE9CSkVDVElELCB4MjAxMCwgeDIwMTEsIHgyMDEyLCB4MjAxMywgeDIwMTQsIHgyMDE1LCB4MjAxNiwgeDIwMTcsIHgyMDE4LCB4MjAxOSwgeDIwMjAsIFNoYXBlX19BcmVhLCBTaGFwZV9fLi4uXG7ihLkgVXNlIGBzcGVjKClgIHRvIHJldHJpZXZlIHRoZSBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9uIGZvciB0aGlzIGRhdGEuXG7ihLkgU3BlY2lmeSB0aGUgY29sdW1uIHR5cGVzIG9yIHNldCBgc2hvd19jb2xfdHlwZXMgPSBGQUxTRWAgdG8gcXVpZXQgdGhpcyBtZXNzYWdlLlxuIn0= -->
+<pre><code>Rows: 55 Columns: 16── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr  (2): Place_1, Place_2
+dbl (14): OBJECTID, x2010, x2011, x2012, x2013, x2014, x2015, x2016, x2017, x2018, x2019, x2020, Shape__Area, Shape__...
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudmlldyhiYWx0X3BvcClcblxuYGBgIn0= -->
+<pre class="r"><code>view(balt_pop)
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>For each year, the values below are the percent of 16-19-year-olds in
 Baltimore who are either enrolled in school or employed.</p>
-<p>Question 1:</p>
+<p>Question 1: Which 5 communities in Baltimore experienced the highest
+growth of 16-19 year olds who were either employed or enrolled in
+school? Which 5 experienced the least growth (largest decrease)? What
+was the percent change of each?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5ncm93dGggPC0gYmFsdF9wb3AgJT4lICNDcmVhdGVzIG5ldyBkYXRhIGZyYW1lXG4gIHNlbGVjdChQbGFjZV8xLCBQbGFjZV8yLCB4MjAxMCwgeDIwMjApICU+JSAjU2VsZWN0cyB3aGljaCBjb2x1bW5zIHdpbGwgYmUgaW4gdGhlIG5ldyBkYXRhIGZyYW1lXG4gIG11dGF0ZShwY3RfY2hhbmdlID0gKCh4MjAyMC14MjAxMCkveDIwMTApKjEwMCkgI0FkZHMgY29sdW1uIGZvciBwZXJjZW50IGNoYW5nZSBhbmQgY2FsY3VsYXRlcyBwZXJjZW50IGNoYW5nZVxuXG5gYGAifQ== -->
+<pre class="r"><code>
+growth &lt;- balt_pop %&gt;% #Creates new data frame
+  select(Place_1, Place_2, x2010, x2020) %&gt;% #Selects which columns will be in the new data frame
+  mutate(pct_change = ((x2020-x2010)/x2010)*100) #Adds column for percent change and calculates percent change
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>To calculate the 5 communities with the highest growth:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3Jvd3RoICU+JVxuICBncm91cF9ieShQbGFjZV8xKSAlPiVcbiAgc3VtbWFyaXNlKFxuICAgIHBjdF9jaGFuZ2VcbiAgKSAlPiUgXG4gIGFycmFuZ2UoZGVzYyhwY3RfY2hhbmdlKSkgJT4lXG4gIGhlYWQoNSlcbmBgYCJ9 -->
+<pre class="r"><code>growth %&gt;%
+  group_by(Place_1) %&gt;%
+  summarise(
+    pct_change
+  ) %&gt;% 
+  arrange(desc(pct_change)) %&gt;%
+  head(5)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NSwibmNvbCI6Miwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI1IMOXIDIiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFSUFUvQ1FCZytDb1hRQlBCcmNXTndsQkppSWlZdUZVRW5JL0VySkE3a2FFL2FjTnpWNnhYY2RIRTAwVTAzNCtCZmNIRDFUemk0R1ArRkNmVUtkMGJiNGZxOHozUFArM1VIemM2YTBURUFBR21RU1dzZ3JRc0k5T09qbmNvR0FCbE5CQ21RQWZuNGZ5RXVMUW9RazNQeExTbVVEbW5JM1hJRFl1NE5LVU9TWG1wU1pyc280SWhWdHdLM0Z6Sk9pZFRtZHhtQ1FpanZVZUxBOGREN0ZWck9VRkFCSmVVVEQyUFlWOW1XdDEyUG5JZlE5MGk1RGRtZzJrQjRoQndreWdGUWpMdXhUbGV2YjU4dUg2d0crZnA0ZjFteE5qOWY3eGJNc1ZWdndmM24ycjIxL2xoNTAyNnFpYkYwQW9jb2tDTnBrc3kxTWJSUnR5WkR3N2Q1MTNZaEVlMzhkK2NaSFpzcVF5SE9jQ1dPS0lxK2syVnNEQU5WUnBHR0F6azB6NWp3aTJpU3NPU296ejFLaEVtTDE1NU5tRk1zUVpSQ0VuZmlWR3czSklOS1BTR25mZEtQYTA2cDJWZVFXUCtEdFZrWFdpVHRXV25QSXRMM2lIb09IY01ld2lxemcwWVNGc1UrcHVzd2ZlWVJydVlVYkdCeXlxR3lHRGJGaXBsT0RpWS9DR3Brd0lzQ0FBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Place_1"],"name":[1],"type":["chr"],"align":["left"]},{"label":["pct_change"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"South Baltimore","2":"108.69565"},{"1":"Dorchester/Ashburton","2":"36.86636"},{"1":"Greater Mondawmin","2":"27.88567"},{"1":"Edmondson Village","2":"23.27102"},{"1":"Chinquapin Park/Belvedere","2":"22.62570"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[5]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>To calculate the 5 communities with the least growth:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3Jvd3RoICU+JVxuICBncm91cF9ieShQbGFjZV8xKSAlPiVcbiAgc3VtbWFyaXNlKFxuICAgIHBjdF9jaGFuZ2VcbiAgKSAlPiUgXG4gIGFycmFuZ2UocGN0X2NoYW5nZSkgJT4lXG4gIGhlYWQoNSlcbmBgYCJ9 -->
+<pre class="r"><code>growth %&gt;%
+  group_by(Place_1) %&gt;%
+  summarise(
+    pct_change
+  ) %&gt;% 
+  arrange(pct_change) %&gt;%
+  head(5)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NSwibmNvbCI6Miwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI1IMOXIDIiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFSdjA3Q1FCZy9Db1hRQ0pqbzRHSlNINEFXWkdFd0Rnam9KakVZMk1oUlRtaDYzSkhyRmNUSnhNWEpCL0VCblBzZ0RpYnlBaTRzSnRRN3VFYnREWGUvNy9kOXYrL1BmVGZOZnMzb0d3Q0FOTWlrTlpEV0JRVDZiYmRkcmdPUTBZU1JBaG1RbCsrOUNEb1FRSkw3TWtvNWpwcXU0NkhsM01VWTJXMEdpWWRkd3VtQ0tQOWhtekxrYzdNRG1XZjNJQjR5U2ozbE8ybElBeStKZlJFdzd2cG1BeTd0Szdqd1hPS2JIU3J5cU1CQ2Q0TE1IcHdqaGwza0s3SjB5UkFpVXhvUWJyYWd6d1ZWbEkyRjdmcm5pOTAvRFJ1cjgvVTdXNFZuMS9ueTY0Y2VWdGJWNDYrM1ZsanBQenp0UGRjU0Urb0VUa1h1M1hTYUluTWREQjAwcUNyVG1EbDg0RXdnR2FPRU9zL293b296RkdTR1IzRkZVZlNkTE9OZzZNZGxZdElZUVE2dE95YjB3dG9rSkRrNjR5NGxRcVRKRFdRVDRoUkxFS1dBeUU1R1pXY1NFRSt1OHA4N1BTTmpXWE5MN1U1QllmMFAxblpkYUpHU1o1VThpOGpZSlNnZUI4TWh3bkhtRVpvcldCVC9zZjBPYThaKzkyZ0kxcmM0NVRDV0dBN0ZNYk9kSEd4K0FJM1o5SFNXQWdBQSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Place_1"],"name":[1],"type":["chr"],"align":["left"]},{"label":["pct_change"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Dickeyville/Franklintown","2":"-44.44444"},{"1":"Forest Park/Walbrook","2":"-37.78317"},{"1":"Brooklyn/Curtis Bay/Hawkins Point","2":"-28.30873"},{"1":"The Waverlies","2":"-16.96169"},{"1":"Greenmount East","2":"-16.34562"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[5]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQXNzaWdubWVudCAxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpUbyBsb2FkIHRoZSBuZWNlc3NhcnkgcGFja2FnZXM6CgpgYGB7cn0KCmxpYnJhcnkgKHRpZHl2ZXJzZSkKbGlicmFyeSAocm1hcmtkb3duKQpsaWJyYXJ5IChqYW5pdG9yKQpsaWJyYXJ5IChnZ3Bsb3QyKQpsaWJyYXJ5IChnZ3RoZW1lcykKbGlicmFyeSAoZHBseXIpCgojIEFzc3VtaW5nIHRoZXNlIHBhY2thZ2VzIGFyZSBhbHJlYWR5IGluc3RhbGxlZC4KIyBBc3N1bWluZyBiYXNlLCBkYXRhc2V0cywgZm9yY2F0cywgZ3JhcGhpY3MsIHB1cnJyLCByZWFkciwgYW5kIHN0YXRzIGFyZSBhbHJlYWR5IGluc3RhbGxlZCBhbmQgbG9hZGVkLgoKYGBgCgpUbyBsb2FkIGFuZCB2aWV3IHRoZSBuZWNlc3NhcnkgZGF0YToKCmBgYHtyfQoKYmFsdF9wb3AgPC0gcmVhZF9jc3YoImJhbHRfcG9wXzE2XzE5LmNzdiIpCnZpZXcoYmFsdF9wb3ApCgpgYGAKCkZvciBlYWNoIHllYXIsIHRoZSB2YWx1ZXMgYmVsb3cgYXJlIHRoZSBwZXJjZW50IG9mIDE2LTE5LXllYXItb2xkcyBpbiBCYWx0aW1vcmUgd2hvIGFyZSBlaXRoZXIgZW5yb2xsZWQgaW4gc2Nob29sIG9yIGVtcGxveWVkLgoKUXVlc3Rpb24gMToK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQXNzaWdubWVudCAxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpUbyBsb2FkIHRoZSBuZWNlc3NhcnkgcGFja2FnZXM6CgpgYGB7cn0KCmxpYnJhcnkgKHRpZHl2ZXJzZSkKbGlicmFyeSAocm1hcmtkb3duKQpsaWJyYXJ5IChqYW5pdG9yKQpsaWJyYXJ5IChnZ3Bsb3QyKQpsaWJyYXJ5IChnZ3RoZW1lcykKbGlicmFyeSAoZHBseXIpCgojIEFzc3VtaW5nIHRoZXNlIHBhY2thZ2VzIGFyZSBhbHJlYWR5IGluc3RhbGxlZC4KIyBBc3N1bWluZyBiYXNlLCBkYXRhc2V0cywgZm9yY2F0cywgZ3JhcGhpY3MsIHB1cnJyLCByZWFkciwgYW5kIHN0YXRzIGFyZSBhbHJlYWR5IGluc3RhbGxlZCBhbmQgbG9hZGVkLgoKYGBgCgpUbyBsb2FkIGFuZCB2aWV3IHRoZSBuZWNlc3NhcnkgZGF0YToKCmBgYHtyfQoKYmFsdF9wb3AgPC0gcmVhZF9jc3YoImJhbHRfcG9wXzE2XzE5LmNzdiIpCnZpZXcoYmFsdF9wb3ApCgpgYGAKCkZvciBlYWNoIHllYXIsIHRoZSB2YWx1ZXMgYmVsb3cgYXJlIHRoZSBwZXJjZW50IG9mIDE2LTE5LXllYXItb2xkcyBpbiBCYWx0aW1vcmUgd2hvIGFyZSBlaXRoZXIgZW5yb2xsZWQgaW4gc2Nob29sIG9yIGVtcGxveWVkLgoKUXVlc3Rpb24gMToKV2hpY2ggNSBjb21tdW5pdGllcyBpbiBCYWx0aW1vcmUgZXhwZXJpZW5jZWQgdGhlIGhpZ2hlc3QgZ3Jvd3RoIG9mIDE2LTE5IHllYXIgb2xkcyB3aG8gd2VyZSBlaXRoZXIgZW1wbG95ZWQgb3IgZW5yb2xsZWQgaW4gc2Nob29sPyBXaGljaCA1IGV4cGVyaWVuY2VkIHRoZSBsZWFzdCBncm93dGggKGxhcmdlc3QgZGVjcmVhc2UpPyBXaGF0IHdhcyB0aGUgcGVyY2VudCBjaGFuZ2Ugb2YgZWFjaD8KCmBgYHtyfQoKZ3Jvd3RoIDwtIGJhbHRfcG9wICU+JSAjQ3JlYXRlcyBuZXcgZGF0YSBmcmFtZQogIHNlbGVjdChQbGFjZV8xLCBQbGFjZV8yLCB4MjAxMCwgeDIwMjApICU+JSAjU2VsZWN0cyB3aGljaCBjb2x1bW5zIHdpbGwgYmUgaW4gdGhlIG5ldyBkYXRhIGZyYW1lCiAgbXV0YXRlKHBjdF9jaGFuZ2UgPSAoKHgyMDIwLXgyMDEwKS94MjAxMCkqMTAwKSAjQWRkcyBjb2x1bW4gZm9yIHBlcmNlbnQgY2hhbmdlIGFuZCBjYWxjdWxhdGVzIHBlcmNlbnQgY2hhbmdlCgpgYGAKClRvIGNhbGN1bGF0ZSB0aGUgNSBjb21tdW5pdGllcyB3aXRoIHRoZSBoaWdoZXN0IGdyb3d0aDoKYGBge3J9Cmdyb3d0aCAlPiUKICBncm91cF9ieShQbGFjZV8xKSAlPiUKICBzdW1tYXJpc2UoCiAgICBwY3RfY2hhbmdlCiAgKSAlPiUgCiAgYXJyYW5nZShkZXNjKHBjdF9jaGFuZ2UpKSAlPiUKICBoZWFkKDUpCmBgYApUbyBjYWxjdWxhdGUgdGhlIDUgY29tbXVuaXRpZXMgd2l0aCB0aGUgbGVhc3QgZ3Jvd3RoOgpgYGB7cn0KZ3Jvd3RoICU+JQogIGdyb3VwX2J5KFBsYWNlXzEpICU+JQogIHN1bW1hcmlzZSgKICAgIHBjdF9jaGFuZ2UKICApICU+JSAKICBhcnJhbmdlKHBjdF9jaGFuZ2UpICU+JQogIGhlYWQoNSkKYGBgCgoKCg==</div>
 
 
 

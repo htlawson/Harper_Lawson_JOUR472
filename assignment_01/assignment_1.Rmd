@@ -31,13 +31,36 @@ view(balt_pop)
 For each year, the values below are the percent of 16-19-year-olds in Baltimore who are either enrolled in school or employed.
 
 Question 1:
-
+Which 5 communities in Baltimore experienced the highest growth of 16-19 year olds who were either employed or enrolled in school? Which 5 experienced the least growth (largest decrease)? What was the percent change of each?
 
 ```{r}
 
-pct_change <- balt_pop %>% 
-  select(place, x2010_black, x2010_total, x2020_black, x2020_total) %>%
-  mutate(pct_change = (x2010_black/x2010_total)*100) %>%
+growth <- balt_pop %>% #Creates new data frame
+  select(Place_1, Place_2, x2010, x2020) %>% #Selects which columns will be in the new data frame
+  mutate(pct_change = ((x2020-x2010)/x2010)*100) #Adds column for percent change and calculates percent change
 
 ```
+
+To calculate the 5 communities with the highest growth:
+```{r}
+growth %>%
+  group_by(Place_1) %>%
+  summarise(
+    pct_change
+  ) %>% 
+  arrange(desc(pct_change)) %>%
+  head(5)
+```
+To calculate the 5 communities with the least growth:
+```{r}
+growth %>%
+  group_by(Place_1) %>%
+  summarise(
+    pct_change
+  ) %>% 
+  arrange(pct_change) %>%
+  head(5)
+```
+
+
 
