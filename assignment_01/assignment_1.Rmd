@@ -1,7 +1,21 @@
 ---
-title: "Assignment 1"
+title: "lawson_assignment_01"
 output: html_notebook
 ---
+
+# **An Analysis of Trends in Baltimore's 16-19-year-old teens**
+
+## Harper Lawson
+
+### Background
+
+The data utilized in this notebook is from the Vital Signs Open Data Portal. The title of the spreadsheet online is "Percentage of Population aged 16-19 in School and/or Employed."
+
+It collects data from 2010-2020. It is worth noting that the boundaries of certain neighborhoods underwent small changes before the data was collected in 2020, which is why there is a separate column with updated neighborhood names for 2020.
+
+It can be inferred that if teenagers are neither enrolled in school or working a job, that their financial situation is not ideal. This is why this data is a fair representation of wealth inequality in Baltimore, as the neighborhoods have varying statistics.
+
+### Process
 
 To load the necessary packages:
 
@@ -29,7 +43,9 @@ balt_pop <- read_csv("balt_pop_16_19.csv")
 
 For each year, the values below are the percent of 16-19-year-olds in Baltimore who are either enrolled in school or employed.
 
-Question 1: A) Which 5 communities in Baltimore experienced the highest growth of 16-19 year olds who were either employed or enrolled in school? What was the percent change of each?
+#### Question 1:
+
+**A)** Which 5 communities in Baltimore experienced the highest growth of 16-19 year olds who were either employed or enrolled in school? What was the percent change of each?
 
 To make a new data frame with growth info:
 
@@ -55,7 +71,7 @@ growth %>%
 
 ```
 
-B)  South Baltimore had the highest growth by a landslide. What percentage of 16-19-year-olds were in school or employed in 2010? 2015? 2020?
+**B)** South Baltimore had the highest growth by a landslide. What percentage of 16-19-year-olds were in school or employed in 2010? 2015? 2020?
 
 ```{r}
 
@@ -68,7 +84,9 @@ select(Place_1, x2010, x2015, x2020)
 
 By looking at my new south_balt table and visualization, I can see that 47.92% of 16-19-year-olds were in school or employed in 2010, 98.48% in 2015, and 100.00% in 2020. Was this growth gradual, or did it happen quickly over a short time period?
 
-Question 2: Which one-year period showed the highest growth in South Baltimore?
+#### Question 2:
+
+Which one-year period showed the highest growth in South Baltimore?
 
 ```{r}
 
@@ -91,7 +109,9 @@ south_balt %>%
 
 As we can see from this table, 2012-2013 experienced the highest growth of 16-19-year-olds in school or employed at 83.83%.
 
-Question 3: A) Looking at the south_balt table, when was the percentage of 16-19-year-olds in school or employed in South Baltimore at or below 50%?
+#### Question 3:
+
+**A)** Looking at the south_balt table, when was the percentage of 16-19-year-olds in school or employed in South Baltimore at or below 50%?
 
 ```{r}
 
@@ -102,7 +122,7 @@ south_balt %>%
 
 We can see from this table that the percentage of 16-19-year-olds in school or employed in South Baltimore was at or below 50% in 2010, 2011, and 2012.
 
-B)  How do these values compare to Baltimore's averages during these years?
+**B)** How do these values compare to Baltimore's averages during these years?
 
 First, I will organize the mean values of 2010, 2011, and 2012.
 
@@ -122,7 +142,7 @@ south_balt %>%
 
 ```
 
-...assign some values...
+...assign their values and the mean values...
 
 ```{r}
 
@@ -140,7 +160,7 @@ mean_2012 <- 86.00
 
 ```
 
-...and do some math.
+...and do some subtraction (mean value minus South Baltimore value of the same year).
 
 ```{r}
 mean_2010-south_balt_2010
@@ -150,4 +170,6 @@ mean_2012-south_balt_2012
 
 And now we see how far South Baltimore's 2010-12 percentages were below Baltimore's mean values.
 
-In conclusion, 2010-2012 was a major low point for the community of South Baltimore compared to Baltimore as a whole in terms of how many 16-19-year-olds were in school or employed. On the other hand, 2012-2013 showed amazing growth.
+### Conclusion
+
+2010-2012 was a major low point for the community of South Baltimore compared to Baltimore as a whole in terms of how many 16-19-year-olds were in school or employed. On the other hand, 2012-2013 showed amazing growth.
