@@ -59,13 +59,27 @@ growth <- balt_pop %>%
 
 ```
 
-To calculate the 5 communities with the highest growth:
+To calculate the 5 communities with the highest growth and create a table:
 
 ```{r}
 
-growth %>% 
+top_5_growth <- growth %>% 
   select(Place_1, pct_change) %>% 
   slice_max(pct_change, n=5)
+
+top_5_growth
+
+```
+
+Let's visualize this.
+
+```{r}
+
+top_5_growth %>%
+  select(Place_1, pct_change) %>%
+  ggplot() +
+  geom_bar(aes(x = Place_1, y = pct_change, fill = pct_change), stat = "identity") +
+  labs(x = "Neighborhood", y = "Percent Growth", title = "Top 5 communities in growth of 16-19-year-olds in school or employed")
 
 ```
 
@@ -86,10 +100,11 @@ By looking at my new south_balt table, I can see that 47.92% of 16-19-year-olds 
 
 south_balt %>%
   select(x2010, x2011, x2012, x2013, x2014, x2015, x2016, x2017, x2018, x2019, x2020) %>%
-  gather(key = "year", value = "population", x2010:x2020) %>%
+  gather(key = "year", value = "percent", x2010:x2020) %>%
   ggplot() +
-  geom_bar(aes(x = year, y = population, fill = population), stat = "identity") +
-  labs(x = "Year", y = "Population", title = "Number of 16-19-year-olds in school or employed in South Baltimore (2010-2020")
+  geom_bar(aes(x = year, y = percent, fill = percent), stat = "identity") +
+  labs(x = "Year", y = "Percent", title = "Percentage of 16-19-year-olds in school or employed in South Baltimore (2010-2020)")
+
 
 
 ```
@@ -191,4 +206,26 @@ And now we see how far South Baltimore's 2010-12 percentages were below Baltimor
 
 ### Conclusion
 
-2010-2012 was a major low point for the community of South Baltimore compared to Baltimore as a whole in terms of how many 16-19-year-olds were in school or employed. On the other hand, 2012-2013 showed amazing growth.
+2010-2012 was a major low point for the community of South Baltimore compared to Baltimore as a whole in terms of how many 16-19-year-olds were in school or employed. On the other hand, 2013-2015 showed amazing growth.
+
+### Reporting Memo/Story Pitch
+
+The most newsworthy story found in this data analysis is the growth in the percentage of 16-19-year-olds in school or employed in South Baltimore from 2010 to 2015.
+
+By organizing and analyzing the data provided by the American Community Survey via the Vital Signs Open Data Portal titled, "Percentage of Population aged 16-19 in School and/or Employed," I discovered that this percentage increased from 47.92% in 2010 to 98.48% in 2015, with the most impressive growth happening from 2013 to 2015.
+
+So why is this important?
+
+Based on the analyzed data, a major event had to have occurred in South Baltimore from 2010 to 2014 involving the neighborhood's 16-19-year-old population. Such low rates of young adults enrolled in school or holding a job seems pretty alarming and definitely worth looking into.
+
+On the other hand, another dramatic change or event was likely necessary to inspire growth in this area to the extent that we can see.
+
+Why were so many 16-19-year-olds in South Baltimore neither in school nor employed from 2010 to 2012 (arguably from 2012 to 2014 as well), and what inspired the major growth we saw by 2015?
+
+To find this out, I would need to cross-reference this data with other information from agencies like the U.S. Census Bureau or Baltimore County Public Schools. I could research factors like high school drop-out rates, the employment rate of high school-aged individuals, reported violent crimes within high schools, and drug usage rates among this age group as well.
+
+\*One helpful resource is the Annie E. Casey Foundation, which published research on youth and young adults in all of Baltimore. This information can be found [here](https://www.aecf.org/blog/a-profile-of-youth-and-young-adults-in-baltimore).
+
+By compiling, cross-referencing and analyzing these resources, I could hope to get to the bottom of this anomaly in South Baltimore.
+
+### Tweet Drafts
