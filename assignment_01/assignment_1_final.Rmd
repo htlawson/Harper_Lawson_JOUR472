@@ -1,5 +1,5 @@
 ---
-title: "lawson_assignment_01"
+title: "lawson_assignment_01_final"
 output: html_notebook
 ---
 
@@ -224,8 +224,14 @@ Why were so many 16-19-year-olds in South Baltimore neither in school nor employ
 
 To find this out, I would need to cross-reference this data with other information from agencies like the U.S. Census Bureau or Baltimore County Public Schools. I could research factors like high school drop-out rates, the employment rate of high school-aged individuals, reported violent crimes within high schools, and drug usage rates among this age group as well.
 
-\*One helpful resource is the Annie E. Casey Foundation, which published research on youth and young adults in all of Baltimore. This information can be found [here](https://www.aecf.org/blog/a-profile-of-youth-and-young-adults-in-baltimore).
-
 By compiling, cross-referencing and analyzing these resources, I could hope to get to the bottom of this anomaly in South Baltimore.
 
 ### Tweet Drafts
+
+@htlawson8: Data shows that South Baltimore experienced the largest increase in youth in school or employed compared to other Baltimore neighborhoods. Check it out among the five neighborhoods with the highest growth:
+
+![](images/top_5.png)
+
+@htlawson8: Take a look at South Baltimore's growth in its percentage of 16-19-year-olds in school or employed:
+
+![](images/south_balt.png)
