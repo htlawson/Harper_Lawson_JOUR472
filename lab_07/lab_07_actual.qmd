@@ -83,6 +83,7 @@ arcos_county <- arcos %>%
     mutate(pills_per_person = total_pills/total_population_2014) %>%
     arrange(desc(pills_per_person))
 
+arcos_county
 
 ```
 
@@ -99,12 +100,39 @@ table with the 5 states with the lowest percentage increase.
 
 ```{r}
 
+total_2006 <- arcos %>%
+  filter(year == "2006") %>%
+  rename(total_2006 = total_pills)
 
+total_2014 <- arcos %>%
+  filter(year == "2014") %>%
+  rename(total_2014 = total_pills)
+
+arcos_combo <- inner_join(total_2006, total_2014, by = c("countyfips", "buyer_county", "buyer_state")) %>%
+  inner_join(state_crosswalk, by = c("buyer_state" = "state_abb"))
+
+arcos_combo <- arcos_combo %>%
+  mutate(pct_change = ((total_2014 - total_2006) / total_2006) * 100)
+
+top_5_states <- arcos_combo %>%
+  group_by(state_name) %>%
+  summarise(avg_pct_change = mean(pct_change, na.rm = TRUE)) %>%
+  arrange(desc(avg_pct_change)) %>%
+  slice_max(avg_pct_change, n=5)
+  
+bottom_5_states <- arcos_combo %>%
+  group_by(state_name) %>%
+  summarise(avg_pct_change = mean(pct_change, na.rm = TRUE)) %>%
+  arrange(avg_pct_change) %>%
+  slice_min(avg_pct_change, n=5)
 
 ```
 
 --Write a sentence that could be dropped in as the lede of a news story
 from the finding in question two.
+
+**The state of Missouri saw a massive, 36,000 percent increase in its
+number of purchased opioid pills.**
 
 **Q3** Which U.S. state had the highest number of opioid pills per
 person for pills shipped in 2014? How many total pills, and what was the
@@ -112,6 +140,19 @@ per person rate? How did that compare to Washington, D.C.?
 
 ```{r}
 
+pills_2014 <- arcos_combo %>%
+ group_by(state_name = case_when(
+    state_name == "Washington, DC" ~ "District of Columbia",
+    TRUE ~ state_name
+  )) %>%
+  inner_join(state_pop_2014, by = c("state_name" = "state")) %>%
+  summarise(
+    total_pills = sum(total_2014),
+    total_pop = sum(total_population_2014)
+  ) %>%
+  mutate(pills_per_person = total_pills/total_pop) %>%
+  arrange(desc(pills_per_person))
 
+# The U.S. state with the highest number of opioid pills shipped per person was Delaware. 33,686,260 total pills were shipped at a rate of 12.24 pills per person. Washington, D.C. had a higher number of opioid pills shipped per person in 2014. D.C. shipped 8,599,410 pills at a rate of 13.57 pills per person.
 
 ```
