@@ -4,43 +4,49 @@ output:
       toc: true
       toc_float: true
       toc_depth: 4
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
+
 # R3: Gathering, Cleaning data, 2022
 
-<br>    
+<br>
 
-**NICAR 2022: Atlanta, Georgia**   
+**NICAR 2022: Atlanta, Georgia**\
 ver. 3/4/2022
 
-    Rob Wells, Ph.D.
-    Philip Merrill College of Journalism
-    University of Maryland
-    robwells@umd.edu
-    LinkedIn: https://www.linkedin.com/in/rob-wells-7929329/ 
-    
-<br> 
+```         
+Rob Wells, Ph.D.
+Philip Merrill College of Journalism
+University of Maryland
+robwells@umd.edu
+LinkedIn: https://www.linkedin.com/in/rob-wells-7929329/ 
+```
 
-<img src="images/merrill-logo-dark.png" width="300" height="50" />
-<br>   
-<br> 
+<br>
+
+<img src="images/merrill-logo-dark.png" width="300" height="50"/> <br>\
+<br>
 
 **Goals:**
-    
-   Pull data into R through various means, including accessing APIs and web URLs
-   Clean and structure the data for analysis 
-   
- 
+
+Pull data into R through various means, including accessing APIs and web
+URLs Clean and structure the data for analysis
 
 -- **What is an API**
 
-APIs - basics   
+APIs - basics
 
-    https://medium.com/@LewisMenelaws/a-beginners-guide-to-web-apis-and-how-they-will-help-you-23923a0da450
+```         
+https://medium.com/@LewisMenelaws/a-beginners-guide-to-web-apis-and-how-they-will-help-you-23923a0da450
 
-    A gentle introduction to APIs for data journalists
-    https://trendct.org/2016/12/29/fetching-airport-delays-with-python-a-gentle-guide-to-apis-for-journalists/
-  
+A gentle introduction to APIs for data journalists
+https://trendct.org/2016/12/29/fetching-airport-delays-with-python-a-gentle-guide-to-apis-for-journalists/
+```
+
 Housekeeping
+
 ```{r}
 setwd("C:/Users/nmradmin/Desktop/hands_on_classes/20220305_r_3_gathering_and_cleaning_data_saturday_repeat_3039")
 
@@ -49,6 +55,7 @@ setwd("C:/Users/nmradmin/Desktop/hands_on_classes/20220305_r_3_gathering_and_cle
 # Import from an API
 
 -- **Software: jsonlite**
+
 ```{r include=FALSE}
 #background on tidyverse: https://www.tidyverse.org/packages/
 # install.packages("formattable")
@@ -67,6 +74,7 @@ vignette("json-apis", package = "jsonlite")
 ```
 
 -- **Example: Racing Data**
+
 ```{r}
 res <- fromJSON('http://ergast.com/api/f1/2004/1/results.json')
 View(res)
@@ -74,16 +82,16 @@ View(res)
 
 -- **Nested list**
 
-<br> 
+<br>
 
-<img src="images/API_drivers.png" width="300" height="150" />
-<br>   
-<br> 
+<img src="images/API_drivers.png" width="300" height="150"/> <br>\
+<br>
 
--- **Click on green arrow icon and that will display path directory in the console in R Studio
-    Copy that path into your code
+-- \*\*Click on green arrow icon and that will display path directory in
+the console in R Studio Copy that path into your code
 
 -- **Unpack it**
+
 ```{r}
 drivers <- res[["MRData"]][["RaceTable"]][["Races"]][["Results"]][[1]][["Driver"]]
 ```
@@ -92,14 +100,12 @@ drivers <- res[["MRData"]][["RaceTable"]][["Races"]][["Results"]][[1]][["Driver"
 colnames(drivers)
 ```
 
-
 # Vaccine Data API
 
 -- **Arkansas Vaccine Data**
 
-   1) Poorly documented by state!  
-   2) One day shot of data
-
+1)  Poorly documented by state!\
+2)  One day shot of data
 
 ```{r}
 ## Retrieve County Vaccine Data from ADH FEED
@@ -110,13 +116,12 @@ vaxjson <- fromJSON('https://services5.arcgis.com/vlhGQkz6fSnofVMD/ArcGIS/rest/s
 View(vaxjson )
 ```
 
-
 #Pulls in the data that matters to 'vax'
+
 ```{r}
 vax <- vaxjson[["features"]][["attributes"]]
 glimpse(vax)
 ```
-
 
 ```{r}
 #Add system date
@@ -126,9 +131,9 @@ vax$date <- Sys.Date()
 vax <- clean_names(vax)
 
 #Translate column name jargon
-vax <- vax %>% 
+vax <- as.data.frame(vax) %>%
 rename(Date = "date",
-       County_Name = "adh_covid19_vac_join_county_nam", 
+       County_Name = "adh_covid19_vac_join_county_name", 
        County_Vax_Total =  "vac_demo_county_aggregate_count", 
        White_Total = "vac_demo_county_race0_total", 
        Black_Total= "vac_demo_county_race1_total",
@@ -161,12 +166,10 @@ rename(Date = "date",
 head(vax)
 ```
 
-
 ```{r}
 vax_summary <- vax %>% 
   select(County_Name, County_Vax_Total, Partial_Vax, Fully_Vax,Unk_Dose, Population, Date) 
 ```
-
 
 ```{r}
 #Basic math
@@ -184,13 +187,13 @@ head(vax_summary)
 ```
 
 -- **Chart 15 counties with lowest vaccine percentage**
+
 ```{r}
 vax_summary %>% 
   arrange(desc(Full_Pct)) %>% 
   slice_min(Full_Pct, n= 15) 
   
 ```
-
 
 -- **Chart It**
 
@@ -230,37 +233,34 @@ vax_summary %>%
        x="")
 ```
 
+Feeds to homepage map <https://www.datawrapper.de/_/HZNsT/> This is
+autoloaded to Github via the vaccine_county.csv
 
-Feeds to homepage map
-https://www.datawrapper.de/_/HZNsT/
-This is autoloaded to Github via the vaccine_county.csv
-
-Feeds to vaccine chart
-https://www.datawrapper.de/_/dDKzc/
+Feeds to vaccine chart <https://www.datawrapper.de/_/dDKzc/>
 
 Documentation for live updated charts
-https://academy.datawrapper.de/article/60-external-data-sources
-https://academy.datawrapper.de/article/236-how-to-create-a-live-updating-symbol-map-or-choropleth-map
+<https://academy.datawrapper.de/article/60-external-data-sources>
+<https://academy.datawrapper.de/article/236-how-to-create-a-live-updating-symbol-map-or-choropleth-map>
 
 Definitions for the data feed
-https://docs.google.com/spreadsheets/d/1gJ8aEnX5zmT5ru-WPJjBQ2gEEaGZ4vc_A8hgWK69IdE/edit?usp=sharing
+<https://docs.google.com/spreadsheets/d/1gJ8aEnX5zmT5ru-WPJjBQ2gEEaGZ4vc_A8hgWK69IdE/edit?usp=sharing>
 
+# Analysis of San Francisco Police Calls for Service Data
 
-# Analysis of San Francisco Police Calls for Service Data  
+-   **Here is the original dataset: 3,048,797 records**
 
-- **Here is the original dataset: 3,048,797 records**  
-
-https://data.sfgov.org/Public-Safety/Police-Department-Calls-for-Service/hz9m-tj6z/data
+<https://data.sfgov.org/Public-Safety/Police-Department-Calls-for-Service/hz9m-tj6z/data>
 
 -- **Access the API**
 
-https://datasf.org/opendata/developers/
+<https://datasf.org/opendata/developers/>
 
 -- **Import from an API**
 
-https://data.sfgov.org/resource/hz9m-tj6z.json
+<https://data.sfgov.org/resource/hz9m-tj6z.json>
 
 Load Data
+
 ```{r}
 SF <- rio::import("SF_311_Jan29.xlsx", which = "SF Police_Department_Calls_for_") 
 
@@ -268,7 +268,8 @@ SF <- rio::import("SF_311_Jan29.xlsx", which = "SF Police_Department_Calls_for_"
 
 ```
 
-- **Clean column names, Process dates** 
+-   **Clean column names, Process dates**
+
 ```{r}
 SF <- janitor::clean_names(SF)
 #Process dates
@@ -278,10 +279,12 @@ SF$year <- year(SF$call_date2)
 
 # Cleaning Dispositions
 
-      Clean and structure the data you’ve gathered in preparation for analysis using tidyverse packages.
+```         
+  Clean and structure the data you’ve gathered in preparation for analysis using tidyverse packages.
+```
 
+-- **Total by disposition**
 
--- **Total by disposition**  
 ```{r}
 Action <- SF %>% 
   count(disposition) %>% 
@@ -289,11 +292,12 @@ Action <- SF %>%
 head(Action)
 ```
 
--- **Decode Police Radio Codes**   
+-- **Decode Police Radio Codes**
 
-A guide to what these disposition codes mean   
+A guide to what these disposition codes mean
+
 ```{r}
-copspeak <- rio::import("Radio_Codes_2016.xlsx", which ="RadioCodes")
+copspeak <- rio::import("Radio_Codes_2016 (3).xlsx", which ="RadioCodes")
 head(copspeak)
 
 #In case the file isn't there:
@@ -308,10 +312,11 @@ head(copspeak)
 
 ```
 
-
-- **Serious Actions**: Create a table with the serious actions including citations and arrests police took in the dispositions  
+-   **Serious Actions**: Create a table with the serious actions
+    including citations and arrests police took in the dispositions
 
 Arrest, Cited, Criminal Activation, SF Fire Dept Medical Staff engaged
+
 ```{r}
 Busted <- SF %>% 
   filter(disposition == "ARR" | disposition == "CIT" | disposition == "CRM" | disposition == "SFD") %>% 
@@ -320,15 +325,16 @@ Busted <- SF %>%
 head(Busted)
 ```
 
-Find out when nothing happened with the officer's investigation.
-A table filtering the dispositions column to show "no disposition" or "gone on arrival"
+Find out when nothing happened with the officer's investigation. A table
+filtering the dispositions column to show "no disposition" or "gone on
+arrival"
+
 ```{r}
 Nothing <- SF %>% 
   filter(disposition == "ND" | disposition == "GOA")
 ```
 
-
--- **Translate Cop Jargon to English**   
+-- **Translate Cop Jargon to English**
 
 The disposition column is in cop-speak. We need to clean it up
 
@@ -336,15 +342,18 @@ Step #1: Use mutate to duplicate the column you want to mess with
 
 -- **Mutate command**
 
-    Create new column(s) in the data, or change existing column(s). 
-    mutate() adds new variables and preserves existing
-    Example:
-    mtcars <- as.data.frame(mtcars)
-    View(mtcars)
-  
-    mtcars2 <- mtcars %>% as_tibble() %>% mutate(
-    cyl2 = cyl * 2,
-    cyl4 = cyl2 * 2)
+```         
+Create new column(s) in the data, or change existing column(s). 
+mutate() adds new variables and preserves existing
+Example:
+mtcars <- as.data.frame(mtcars)
+View(mtcars)
+
+mtcars2 <- mtcars %>% as_tibble() %>% mutate(
+cyl2 = cyl * 2,
+cyl4 = cyl2 * 2)
+```
+
 ```{r}
 SF <- SF %>% 
   mutate(disposition1 = disposition)
@@ -352,13 +361,16 @@ SF <- SF %>%
 
 -- **Rename specific text strings**
 
-Example:   
+Example:
 
-     str_replace_all(test.vector, pattern=fixed('-'),     replacement=fixed(':') )
-     Details on string manipulation:  
-     https://dereksonderegger.github.io/570L/13-string-manipulation.html
+```         
+ str_replace_all(test.vector, pattern=fixed('-'),     replacement=fixed(':') )
+ Details on string manipulation:  
+ https://dereksonderegger.github.io/570L/13-string-manipulation.html
+```
 
 Replace ABA with "Abated"
+
 ```{r}
 SF$disposition1 <- str_replace_all(SF$disposition1, pattern=fixed('ABA'), replacement=fixed('Abated') )
 #Again with ADM
@@ -392,6 +404,7 @@ SF <- SF %>%
 ```
 
 Compare our renamed variables to the original disposition
+
 ```{r}
 Action <- SF %>% 
   count(disposition1, disposition) %>% 
@@ -399,8 +412,8 @@ Action <- SF %>%
 head(Action)
 ```
 
+Chart Dispositions
 
-Chart Dispositions  
 ```{r}
 Action %>% 
   filter(n > 100) %>% 
@@ -416,7 +429,7 @@ Action %>%
 
 # Cleaning Crime Data
 
-- **Parse out crime type name**
+-   **Parse out crime type name**
 
 -- **Tabulate types of events**
 
@@ -433,7 +446,8 @@ head(Types)
 
 We need to unpack that
 
-- **Cleaning Sequence**
+-   **Cleaning Sequence**
+
 ```{r}
 #convert all text to lowercase
 SF$crime1 <- tolower(SF$original_crime_type_name)
@@ -452,7 +466,8 @@ SF <- separate(data = SF, col = crime1, into = c("crime2", "crime3", "crime4"), 
 
 ```
 
-For this lesson, we will clean just one column. See Appendix on the method to clean and construct a new dataframe with all of the columns
+For this lesson, we will clean just one column. See Appendix on the
+method to clean and construct a new dataframe with all of the columns
 
 ```{r}
 #Clean Crime2
@@ -480,7 +495,6 @@ SF <- SF %>%
    ))
 ```
 
-
 ```{r}
 #count the offenses
 #remember this is a partial total
@@ -491,6 +505,7 @@ SF %>%
 ```
 
 -- **Compare to Types Table**
+
 ```{r}
 #Look at the Types table: some columns have one code, some have two.
 Types %>% 
@@ -514,11 +529,10 @@ SF %>%
        x="Action")
 ```
 
-
-
-- **Question**: What is the trend for arrests over the time period?  
+-   **Question**: What is the trend for arrests over the time period?
 
 Process dates using lubidate
+
 ```{r}
 SF <- SF %>% 
   mutate(yearmo = format(call_date, "%Y-%m"))
@@ -542,7 +556,8 @@ SF %>%
        x="Year")
 ```
 
-- **Question**: What are the hours most likely for complaints?    
+-   **Question**: What are the hours most likely for complaints?\
+
 ```{r}
 #format to hours
 SF$hour <- hour(SF$call_date_time)
@@ -564,6 +579,7 @@ SF %>%
 # Part 5: Using Mutate, Pct Calcs
 
 Chart the number of calls by year and month
+
 ```{r}
 SF %>% 
   count(yearmo) %>% 
@@ -579,8 +595,10 @@ SF %>%
        y="Number of Calls",
        x="Year")
 ```
-Build a summary table with the days of the week with the greatest
-number of calls. Create a graphic. Then build a table to see if the complaints vary by day
+
+Build a summary table with the days of the week with the greatest number
+of calls. Create a graphic. Then build a table to see if the complaints
+vary by day
 
 ```{r}
 SF <- SF %>% 
@@ -590,6 +608,7 @@ Weekday_Count <- SF %>%
   count(weekday) %>%
   arrange(desc(n))
 ```
+
 Graphic of calls by weekdays
 
 ```{r}
@@ -606,23 +625,21 @@ Weekday_Count %>%
        x="Weekday")
 ```
 
-
 # Appendix
 
-
 #At Home: Load data at home from Internet
+
 ```{r}
 SF <- rio::import("https://github.com/profrobwells/HomelessSP2020/blob/master/Data/SF_311_Jan29.xlsx?raw=true", which = "SF Police_Department_Calls_for_") 
 ```
 
-
 #police radio codes data
-https://data.sfgov.org/api/views/hz9m-tj6z/files/b60ee24c-ae7e-4f0b-a8d5-8f4bd29bf1de?download=true&filename=Radio%20Codes%202016.xlsx
-
+<https://data.sfgov.org/api/views/hz9m-tj6z/files/b60ee24c-ae7e-4f0b-a8d5-8f4bd29bf1de?download=true&filename=Radio%20Codes%202016.xlsx>
 
 ### How to Clean all of the Crime Columns
 
-- **Cleaning Sequence**
+-   **Cleaning Sequence**
+
 ```{r}
 #convert all text to lowercase
 SF$crime1 <- tolower(SF$original_crime_type_name)
@@ -641,7 +658,8 @@ SF <- separate(data = SF, col = crime1, into = c("crime2", "crime3", "crime4"), 
 
 ```
 
-For this lesson, we will clean just one column. See Appendix on the method to clean and construct a new dataframe with all of the columns
+For this lesson, we will clean just one column. See Appendix on the
+method to clean and construct a new dataframe with all of the columns
 
 ```{r}
 #Clean Crime2
@@ -668,7 +686,6 @@ SF <- SF %>%
      TRUE ~ ""
    ))
 ```
-
 
 ```{r}
 #Clean Crime3
@@ -695,7 +712,6 @@ SF <- SF %>%
      TRUE ~ ""
    ))
 ```
-
 
 ```{r}
 #Clean Crime4
@@ -724,6 +740,7 @@ SF <- SF %>%
 ```
 
 --**Create a New Dataframe to Tabulate the Crimes**
+
 ```{r}
 #Three mini dataframes with two columns
 crime1 <- SF %>% 
@@ -746,7 +763,9 @@ Total_Calls_Master <- Total_Calls_Master %>%
 #export
 write_csv(Total_Calls_Master, "Total_Calls_Master.csv")
 ```
+
 --**Fact Check**
+
 ```{r}
 x <- SF %>% 
   select(crime_cleaned) %>% 
@@ -754,7 +773,6 @@ x <- SF %>%
   arrange(desc(n))
 head(x)
 ```
-
 
 ```{r}
 Crime_Sums <- Total_Calls_Master %>% 
@@ -765,6 +783,7 @@ head(Crime_Sums)
 ```
 
 Make into html table
+
 ```{r}
 #install.packages("kableExtra")
 library(kableExtra)
@@ -777,12 +796,8 @@ Crime_Sums %>%
   kable_styling("striped")
 ```
 
+<img src="images/RStudio-Logo-Blue-Gradient.png" width="300" height="100"/>
+<br>\
+<br>
 
-
-<img src="images/RStudio-Logo-Blue-Gradient.png" width="300" height="100" />
-<br>  
-<br> 
-
-
-
--**30**
+\-**30**
