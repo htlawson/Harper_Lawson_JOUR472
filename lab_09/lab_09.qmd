@@ -2,6 +2,7 @@
 editor: 
   markdown: 
     wrap: sentence
+---2
 ---
 
 #lab_08 Sean Mussenden, Aug 16, 2022
@@ -54,8 +55,6 @@ baltimore_demographics <- read_rds("data/baltimore_tract_demographics.rds")
 
 ```{r}
 
-total_homicides <- nrow(final_data)
-
 baltimore_homicides_sf <- st_as_sf(baltimore_homicides)
 joined_data <- st_join(baltimore_homicides_sf, baltimore_shapefiles)
 
@@ -79,17 +78,22 @@ solve_rates <- final_data %>%
   mutate(solve_rate = (closed_by_arrest / total_shootings) * 100)
 
 solve_rates %>%
-  select(majority_minority_white, closed_by_arrest, closed_without_arrest, open_no_arrest) %>%
-  pivot_longer(cols = -majority_minority_white, names_to = "outcome", values_to = "count") %>%
-  ggplot(aes(x = outcome, y = count, fill = majority_minority_white)) +
+  ggplot(aes(x = majority_minority_white, y = solve_rate, fill = majority_minority_white)) +
   geom_col(position = "dodge") +
-  labs(title = "Solved and Unsolved Homocides by Race",
-       x = "Outcome",
-       y = "Count",
-       fill = "Majority or Minority White")
-
+  labs(title = "Homicide Solve Rates by Race",
+       x = "Race",
+       y = "Solve Rate",
+       fill = "Majority or Minority White") +
+  theme_minimal()
 
 
 ```
 
 **A1**
+
+Homicides that occur in primarily white Beltimore Census tracts are solved at a 20 percent higher rate than those that occur in Census tracts with a minority white population, data shows.
+54 percent of homicides that occur in Census tracts with a white majority are closed by an arrest, compared to only 34 percent in non-white Census tracts.
+
+The other options, which are closed without an arrest and open without an arrest, occur much more frequently in non-white census tracts.
+
+While more homicides occur in non-white Baltimore Census tracts, a discrepancy in the rate at which they are solved this large is highly suggestive that these neighborhoods are frequently not prioritized in solving criminal cases.
