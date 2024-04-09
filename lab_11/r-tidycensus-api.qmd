@@ -238,8 +238,8 @@ acs_joined <- inner_join(acs_male, total_pop_2020, by = c("NAME" = "state"))
 
 acs_joined <- acs_joined %>%
   mutate(pct = (estimate/total_population)*100) %>%
-  arrange(desc(total_population))
+  arrange(desc(pct))
 
 ```
 
-The state with the largest male population is California with a male population of 19,562,882, which is 49.5% of its total population.
+The state with the largest male population compared to the total population is Alaska. Its male population is 384,653, which is 52.4% of its total population.
