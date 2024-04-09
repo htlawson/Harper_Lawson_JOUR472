@@ -1,0 +1,12 @@
+"0",""
+"0","acs_male <- get_acs(geography = ""state"","
+"0","              variables = c(male_population = ""B01001_002""),"
+"0","              year = 2020)"
+"2","Getting data from the 2016-2020 5-year ACS
+"
+"0","acs_joined <- inner_join(acs_male, total_pop_2020, by = c(""NAME"" = ""state""))"
+"0",""
+"0","acs_joined <- acs_joined %>%"
+"0","  mutate(pct = (estimate/total_population)*100) %>%"
+"0","  arrange(desc(total_population))"
+"0",""

@@ -1,0 +1,5 @@
+"0",""
+"0","baltcity_income <- baltcity_income %>%"
+"0","  mutate(pct_whole = (x2020/sum(x2020, na.rm = TRUE))*100) %>%"
+"0","  arrange(desc(pct_whole))"
+"0",""

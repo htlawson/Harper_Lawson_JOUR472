@@ -1,0 +1,5 @@
+"0",""
+"0","baltcity_income <- baltcity_income %>%"
+"0","  mutate(diff_income = ((x2020-x2010)/x2010)*100) %>%"
+"0","  arrange(desc(diff_income))"
+"0","  "

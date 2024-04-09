@@ -1,0 +1,16 @@
+"0",""
+"0","total_pop_2020 <- get_decennial(geography=""state"", variables=""P1_001N"", year=2020)"
+"2","Getting data from the 2020 decennial Census
+"
+"2","Warning: [36m•[39m You have not set a Census API key. Users without a key are limited to 500
+queries per day and may experience performance limitations.
+[34mℹ[39m For best results, get a Census API key at
+http://api.census.gov/data/key_signup.html and then supply the key to the
+`census_api_key()` function to use it throughout your tidycensus session."
+"2","Using the PL 94-171 Redistricting Data Summary File
+"
+"2","[36mNote: 2020 decennial Census data use differential privacy, a technique that
+introduces errors into data to preserve respondent confidentiality.[39m
+[34mℹ[39m [35mSmall counts should be interpreted with caution.[39m
+[34mℹ[39m [35mSee https://www.census.gov/library/fact-sheets/2021/protecting-the-confidentiality-of-the-2020-census-redistricting-data.html for additional guidance.[39m"
+"0","total_pop_2020"
