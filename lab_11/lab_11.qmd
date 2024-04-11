@@ -185,4 +185,47 @@ married_no_kids_pop <- married_no_kids_pop %>%
 
 ```
 
+```{r}
+
+married_with_kids_pct <- married_with_kids_pop$pct_of_total
+
+total_utah <- 100 - married_with_kids_pct
+
+pie_data_utah <- data.frame(
+  category = c("Married with Kids", "Married without Kids"),
+  percentage = c(married_with_kids_pct, total_utah)
+)
+
+pie_chart_utah <- ggplot(pie_data_utah, aes(x = "", y = percentage, fill = category)) +
+  geom_bar(stat = "identity", width = 1) +
+   geom_text(aes(label = paste0(round(percentage), "%")), position = position_stack(vjust = 0.5)) +
+  coord_polar("y", start = 0) +
+  labs(title = "Proportion of Married-Couple Households with and without Kids (Utah)", fill = "Category") +
+  theme_void() +
+  theme(legend.position = "bottom")
+
+print(pie_chart_utah)
+
+married_no_kids_pct <- married_no_kids_pop$pct_of_total
+
+total_puerto_rico <- 100 - married_no_kids_pct
+
+pie_data_puerto_rico <- data.frame(
+  category = c("Married without Kids", "Married with Kids"),
+  percentage = c(married_no_kids_pct, total_puerto_rico)
+)
+
+pie_chart_puerto_rico <- ggplot(pie_data_puerto_rico, aes(x = "", y = percentage, fill = category)) +
+  geom_bar(stat = "identity", width = 1) +
+   geom_text(aes(label = paste0(round(percentage), "%")), position = position_stack(vjust = 0.5)) +
+  coord_polar("y", start = 0) +
+  labs(title = "Proportion of Married-Couple Households with and without Kids (Puerto Rico)", fill = "Category") +
+  theme_void() +
+  theme(legend.position = "bottom")
+
+print(pie_chart_puerto_rico)
+
+
+```
+
 Utah has the highest percentage of married-couple households with kids out of all married-couple households in the state, and Puerto Rico has the highest number of married-couple households with no kids out of all married-couple households in the territory.
