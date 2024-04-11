@@ -59,8 +59,8 @@ To get that for the Census, you need to [apply for an API key with the Census Bu
 In the code block below, replace YOUR KEY HERE with your key you get by email.  It's a long string of letters and numbers, like this: 549950d36c22ff16455fe196bbbd01d63cf. Don't use this one. It won't work. Use your own. 
 
 ```{r}
-census_api_key("9788f1a2c2f48db2b495aa1230cfb9bfb24d44b2", install=TRUE, overwrite = TRUE)
 
+census_api_key("9788f1a2c2f48db2b495aa1230cfb9bfb24d44b2", install=TRUE, overwrite = TRUE)
 
 ```
 
