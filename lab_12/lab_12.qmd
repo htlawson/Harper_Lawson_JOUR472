@@ -1,11 +1,8 @@
-#lab_12
-Sean Mussenden, Aug 16, 2022
+#lab_12 Sean Mussenden, Aug 16, 2022
 
 ## About this lab
 
-To complete this lab, you need to:
-* write code in empty codeblocks provided to answer questions included (look for **Q**).
-* write out the answer in the form of a complete sentence in the space given (look for **A**).
+To complete this lab, you need to: \* write code in empty codeblocks provided to answer questions included (look for **Q**). \* write out the answer in the form of a complete sentence in the space given (look for **A**).
 
 When you are finished, commit changes and push to your personal GitHub repo, then submit the URL to this document on ELMS.
 
@@ -13,24 +10,116 @@ When you are finished, commit changes and push to your personal GitHub repo, the
 
 There is one main goal of this lab:
 
-* To apply your knowledge of basic web scraping.
-* To integrate scraped data with other data pulled from API packages.
+-   To apply your knowledge of basic web scraping.
+-   To integrate scraped data with other data pulled from API packages.
 
-You will do this by scraping data from the Maryland State Board of Election website, and connecting it with U.S. Census data pulled from the Tidycensus package to answer questions that can be answered with one or more data sets. 
+You will do this by scraping data from the Maryland State Board of Election website, and connecting it with U.S. Census data pulled from the Tidycensus package to answer questions that can be answered with one or more data sets.
 
 You can find election results here: https://elections.maryland.gov/elections/2022/general_results/
 
 ## Load libraries and settings
 
-**Task**: load the tidyverse, tidycensus, rvest and janitor.  Store your Census api key.
+**Task**: load the tidyverse, tidycensus, rvest and janitor. Store your Census api key.
+
+```{r}
+
+library(tidyverse)
+library(tidycensus)
+library(rvest)
+library(janitor)
+
+census_api_key("9788f1a2c2f48db2b495aa1230cfb9bfb24d44b2", install=TRUE, overwrite=TRUE)
+
+```
 
 ## Questions
 
-**Q1** Which candidate, Dan Cox or Wes Moore, got the lowest percentage of their votes on Election Day? What does that suggest? Write up your answer in a sentence. 
+**Q1**
+
+Which candidate, Dan Cox or Wes Moore, got the lowest percentage of their votes on Election Day? What does that suggest? Write up your answer in a sentence.
+
+```{r}
+
+gov_race_results_url <- "https://elections.maryland.gov/elections/2022/general_results/gen_results_2022_1.html"
+
+gov_race_results <- gov_race_results_url %>%
+  read_html() %>%
+  html_table()
+
+gov_race_results <- gov_race_results[[1]] %>%
+  clean_names() %>%
+  mutate(across(c(3,4,5,7,8), parse_number)) %>%
+  mutate(pct_election_day = round(election_day/total*100,2)) %>%
+  slice(-7) %>%
+  arrange(desc(pct_election_day)) %>%
+  select(name, pct_election_day)
+
+gov_race_results
+
+```
+
 **A1**
 
-**Q2** How many counties did Chris Van Hollen win in Maryland's Senate race? 
-**A2** 
+Wes Moore got the lowest percentage of his votes on Election Day. This suggests that many supporters might live out of state or simply prefer absentee voting.
 
-**Q3** What percentage of the vote did Chris Van Hollen in Maryland's wealthiest county by median income. (You must use the Tidycensus package to answer this question).
-**A3** 
+**Q2**
+
+How many counties did Chris Van Hollen win in Maryland's Senate race?
+
+```{r}
+
+senate_race_results_url <- "https://www.elections.maryland.gov/elections/2022/general_results/gen_detail_results_2022_4_1.html"
+
+senate_race_results <- senate_race_results_url %>%
+  read_html() %>%
+  html_table()
+
+senate_results <- senate_race_results[[1]] %>%
+  clean_names() %>%
+  mutate(across(c(3), parse_number)) %>%
+    mutate(across(-1, ~parse_number(str_replace_all(., ",", ""))))
+
+senate_results <- senate_results %>%
+  filter(chris_van_hollen_democratic > chris_chaffee_republican &
+         chris_van_hollen_democratic > scottie_griffin_write_in_democratic & 
+         chris_van_hollen_democratic > andrew_j_wildman_write_in_unaffiliated & 
+         chris_van_hollen_democratic > other_write_ins) %>%
+  slice(-11)
+
+nrow(senate_results)
+
+```
+
+**A2**
+
+Chris Van Hollen won in 11 counties in Maryland's Senate race.
+
+**Q3**
+
+What percentage of the vote did Chris Van Hollen in Maryland's wealthiest county by median income. (You must use the Tidycensus package to answer this question).
+
+```{r}
+
+census_api_key("9788f1a2c2f48db2b495aa1230cfb9bfb24d44b2")
+
+md_counties_income <- get_acs(geography = "county", variables = "B19013_001", state = "MD", geometry = TRUE)
+
+wealthiest_county <- md_counties_income %>%
+  arrange(desc(estimate)) %>%
+  slice(1) %>%
+  pull(NAME)
+
+wealthiest_county
+
+wealthiest_county_results <- senate_results %>%
+  filter(jurisdiction == "Howard")
+
+percentage_vote <- mean(wealthiest_county_results$chris_van_hollen_democratic / sum(wealthiest_county_results[, -1])) * 100
+
+percentage_vote
+
+```
+
+**A3**
+
+Chris Van Hollen won 71% of the vote in Maryland's wealthiest county my median income, Howard County.

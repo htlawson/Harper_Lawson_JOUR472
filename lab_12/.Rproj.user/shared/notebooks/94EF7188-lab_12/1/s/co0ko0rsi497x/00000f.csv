@@ -1,0 +1,16 @@
+"0",""
+"0","library(tidyverse)"
+"0","library(tidycensus)"
+"0","library(rvest)"
+"0","library(janitor)"
+"0",""
+"0","census_api_key(""9788f1a2c2f48db2b495aa1230cfb9bfb24d44b2"", install=TRUE, overwrite=TRUE)"
+"2","Your original .Renviron will be backed up and stored in your R HOME directory if needed.
+"
+"2","Your API key has been stored in your .Renviron and can be accessed by Sys.getenv(""CENSUS_API_KEY""). 
+To use now, restart R or run `readRenviron(""~/.Renviron"")`
+"
+"1","[1]"
+"1"," ""9788f1a2c2f48db2b495aa1230cfb9bfb24d44b2"""
+"1","
+"
