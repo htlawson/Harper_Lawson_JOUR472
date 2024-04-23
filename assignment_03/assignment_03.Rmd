@@ -1,0 +1,49 @@
+---
+title: "Lawson_assignment_03"
+output: html_document
+date: "2024-04-23"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **An Analysis of Crime Rates in Lynchburg, VA**
+
+## Harper Lawson
+
+### Background
+
+XXX
+
+The online data can be found here.
+
+### Process
+
+To load the necessary packages:
+
+```{r}
+
+library (tidyverse)
+library (tidycensus)
+library (rmarkdown)
+library (janitor)
+library (ggplot2)
+library (ggthemes)
+library (dplyr)
+
+# Assuming these packages are already installed.
+# Assuming base, datasets, forcats, graphics, purrr, readr, and stats are already installed and loaded.
+
+```
+
+To load the necessary data:
+
+```{r}
+
+crime_type_lb <- read_csv("data/crime_type_lynchburg.csv")
+general_crime_lb <- read_csv("data/general_crime_lynchburg.csv")
+arrests_lb <- read_csv("data/arrests_lynchburg.csv")
+police_assaults_lb <- read_csv("data/police_assault_lynchburg.csv")
+
+```
