@@ -8,7 +8,7 @@ date: "2024-04-23"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# **An Analysis of Crime Rates in Lynchburg, VA**
+# **An Analysis of Crime Rates in Lynchburg, Virginia from 2012 to 2023**
 
 ## Harper Lawson
 
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 XXX
 
-The online data can be found here.
+The online data can be found [here](https://www.lynchburgvapolice.gov/crime/).
 
 ### Process
 
@@ -41,9 +41,33 @@ To load the necessary data:
 
 ```{r}
 
-crime_type_lb <- read_csv("data/crime_type_lynchburg.csv")
-general_crime_lb <- read_csv("data/general_crime_lynchburg.csv")
-arrests_lb <- read_csv("data/arrests_lynchburg.csv")
-police_assaults_lb <- read_csv("data/police_assault_lynchburg.csv")
+crime_type_lb <- read_csv("data/crime_type_lynchburg.csv") %>%
+  clean_names()
+general_crime_lb <- read_csv("data/general_crime_lynchburg.csv") %>%
+  clean_names()
+arrests_lb <- read_csv("data/arrests_lynchburg.csv") %>%
+  clean_names()
+police_assaults_lb <- read_csv("data/police_assault_lynchburg.csv") %>%
+  clean_names()
 
 ```
+
+### Question 1:
+
+#### In which areas has Lynchburg seen a *decrease* in crime? In which areas has Lynchburg seen an *increase* in crime?
+
+### Question 2:
+
+#### Out of all crime in Lynchburg, what trends have there been in the violent crime rate?
+
+### Question 3:
+
+#### Which year saw the most crime? The least?
+
+### Question 4:
+
+#### What is the most common crime committed in Lynchburg?
+
+### Question 5:
+
+#### How do each of these findings compare to the state of Virginia as a whole?
