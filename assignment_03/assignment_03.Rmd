@@ -14,9 +14,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Background
 
-XXX
+This data notebook includes data from the Lynchburg Police Department, the Federal Bureau of Investigation and the U.S. Census Bureau. The data ranges from 2012-2023.
 
-The online data can be found [here](https://www.lynchburgvapolice.gov/crime/).
+Analysis includes that of Lynchburg's population, violent crime rate, arrests by crime, general crime report, and assaults on police officers. Also analyzed is the state of Virginia's violent crime rate.
+
+The online data from the Lynchburg Police Department can be found [here](https://www.lynchburgvapolice.gov/crime/).
+
+The online data from the FBI can be found [here](https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend).
+
+The online data from the U.S. Census can be found [here](https://www.census.gov/quickfacts/fact/table/lynchburgcitycountyvirginia/PST045223).
 
 ### Process
 
@@ -49,6 +55,10 @@ arrests_lb <- read_csv("data/arrests_lynchburg.csv") %>%
   clean_names()
 police_assaults_lb <- read_csv("data/police_assault_lynchburg.csv") %>%
   clean_names()
+lb_pop <- read_csv("data/lynchburg_pop.csv") %>%
+  clean_names()
+va_crime <- read_csv("data/crime_rates_va.csv") %>%
+  clean_names()
 
 ```
 
@@ -62,12 +72,12 @@ police_assaults_lb <- read_csv("data/police_assault_lynchburg.csv") %>%
 
 ### Question 3:
 
-#### Which year saw the most crime? The least?
+#### How does Lynchburg's violent crime rate compare to that of the state of Virginia?
 
 ### Question 4:
 
-#### What is the most common crime committed in Lynchburg?
+#### Which year saw the most crime? The least?
 
 ### Question 5:
 
-#### How do each of these findings compare to the state of Virginia as a whole?
+#### What is the most common crime committed in Lynchburg?

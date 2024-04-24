@@ -1,0 +1,58 @@
+---
+title: "Lawson html page"
+author: "Harper Lawson"
+date: "2024-04-23"
+format:
+  html:
+    theme: cosmo
+---
+
+# R Commands Cheat Sheet
+
+## Harper Lawson
+
+### Loading packages and data
+
+-   library(): loads packages
+
+-   install.packages(): installs new packages
+
+-   read_csv(): reads csv files
+
+### Working directories
+
+-   getwd(): finds current working directory
+
+-   setwd(): sets working directory
+
+### Cleaning and organizing data frames
+
+-   clean_names(): cleans column and row names
+
+-   filter(): filter's data for specific information
+
+-   arrange(): arranges value order in a certain way
+
+### Analyzing data
+
+-   nrow(): counts number of rows
+
+-   ncol(): counts number of columns
+
+-   select(): selects specific categories
+
+-   mutate(): creates, modifies, deletes columns
+
+-   inner_join(): joins data frames by linked column name
+
+-   left_join(): joins data frames by categories from first data set
+
+-   right_join(): joins data frames by categories from second data set
+
+-   full_join(): joins data frames and includes all information
+
+### Data Visualization
+
+-   ggplot2() +
+
+    -   gg
