@@ -1,89 +1,39 @@
-Fact,Fact Note,"Lynchburg city (County), Virginia","Value Note for Lynchburg city (County), Virginia"
-"Population estimates, July 1, 2023, (V2023)",,"79,535",
-"Population Estimates, July 1, 2022, (V2022)",,"79,228",
-"Population estimates base, April 1, 2020, (V2023)",,"79,007",
-"Population estimates base, April 1, 2020, (V2022)",,"79,007",
-"Population, percent change - April 1, 2020 (estimates base) to July 1, 2023, (V2023)",,0.70%,
-"Population, percent change - April 1, 2020 (estimates base) to July 1, 2022, (V2022)",,0.30%,
-"Population, Census, April 1, 2020",,"79,009",
-"Population, Census, April 1, 2010",,"75,568",
-"Persons under 5 years, percent",,6.10%,
-"Persons under 18 years, percent",,19.10%,
-"Persons 65 years and over, percent",,14.50%,
-"Female persons, percent",,53.00%,
-"White alone, percent",,65.90%,
-"Black or African American alone, percent",(a),28.00%,
-"American Indian and Alaska Native alone, percent",(a),0.50%,
-"Asian alone, percent",(a),2.80%,
-"Native Hawaiian and Other Pacific Islander alone, percent",(a),0.10%,
-"Two or More Races, percent",,2.70%,
-"Hispanic or Latino, percent",(b),4.90%,
-"White alone, not Hispanic or Latino, percent",,62.00%,
-"Veterans, 2018-2022",,"4,056",
-"Foreign born persons, percent, 2018-2022",,4.20%,
-"Housing units, July 1, 2022, (V2022)",,"34,204",
-"Owner-occupied housing unit rate, 2018-2022",,48.70%,
-"Median value of owner-occupied housing units, 2018-2022",,"$196,000 ",
-"Median selected monthly owner costs -with a mortgage, 2018-2022",,"$1,285 ",
-"Median selected monthly owner costs -without a mortgage, 2018-2022",,$469 ,
-"Median gross rent, 2018-2022",,$972 ,
-"Building permits, 2022",,211,
-"Households, 2018-2022",,"28,910",
-"Persons per household, 2018-2022",,2.37,
-"Living in same house 1 year ago, percent of persons age 1 year+, 2018-2022",,77.70%,
-"Language other than English spoken at home, percent of persons age 5 years+, 2018-2022",,6.90%,
-"Households with a computer, percent, 2018-2022",,93.80%,
-"Households with a broadband Internet subscription, percent, 2018-2022",,90.30%,
-"High school graduate or higher, percent of persons age 25 years+, 2018-2022",,90.30%,
-"Bachelor's degree or higher, percent of persons age 25 years+, 2018-2022",,38.00%,
-"With a disability, under age 65 years, percent, 2018-2022",,9.90%,
-"Persons without health insurance, under age 65 years, percent",,7.50%,
-"In civilian labor force, total, percent of population age 16 years+, 2018-2022",,58.80%,
-"In civilian labor force, female, percent of population age 16 years+, 2018-2022",,54.30%,
-"Total accommodation and food services sales, 2017 ($1,000)",(c),"292,100",
-"Total health care and social assistance receipts/revenue, 2017 ($1,000)",(c),"1,393,728",
-"Total transportation and warehousing receipts/revenue, 2017 ($1,000)",(c),"86,656",
-"Total retail sales, 2017 ($1,000)",(c),"2,162,886",
-"Total retail sales per capita, 2017",(c),"$26,846 ",
-"Mean travel time to work (minutes), workers age 16 years+, 2018-2022",,16.9,
-"Median household income (in 2022 dollars), 2018-2022",,"$56,243 ",
-"Per capita income in past 12 months (in 2022 dollars), 2018-2022",,"$28,478 ",
-"Persons in poverty, percent",,19.60%,
-"Total employer establishments, 2021",,"2,240",
-"Total employment, 2021",,"53,593",
-"Total annual payroll, 2021 ($1,000)",,"2,438,186",
-"Total employment, percent change, 2020-2021",,-5.10%,
-"Total nonemployer establishments, 2021",,"5,342",
-"All employer firms, Reference year 2017",,"1,837",
-"Men-owned employer firms, Reference year 2017",,889,
-"Women-owned employer firms, Reference year 2017",,331,
-"Minority-owned employer firms, Reference year 2017",,137,
-"Nonminority-owned employer firms, Reference year 2017",,"1,316",
-"Veteran-owned employer firms, Reference year 2017",,102,
-"Nonveteran-owned employer firms, Reference year 2017",,"1,300",
-"Population per square mile, 2020",,"1,613.20",
-"Population per square mile, 2010",,"1,538.20",
-"Land area in square miles, 2020",,48.98,
-"Land area in square miles, 2010",,49.13,
-FIPS Code,,"""51680""",
-,,,
-NOTE: FIPS Code values are enclosed in quotes to ensure leading zeros remain intact.,,,
-,,,
-Value Notes,,,
-None,,,
-,,,
-Fact Notes,,,
-(a),Includes persons reporting only one race,,
-(c),Economic Census - Puerto Rico data are not comparable to U.S. Economic Census data,,
-(b),"Hispanics may be of any race, so also are included in applicable race categories",,
-,,,
-Value Flags,,,
--,"Either no or too few sample observations were available to compute an estimate, or a ratio of medians cannot be calculated because one or both of the median estimates falls in the lowest or upper interval of an open ended distribution.",,
-F,Fewer than 25 firms,,
-D,Suppressed to avoid disclosure of confidential information,,
-N,Data for this geographic area cannot be displayed because the number of sample cases is too small.,,
-FN,Footnote on this item in place of data,,
-X,Not applicable,,
-S,Suppressed; does not meet publication standards,,
-NA,Not available,,
-Z,Value greater than zero but less than half unit of measure shown,,
+"year","population","growth","growthRate","yearDisp","populationDisp","growthDisp","growthRateDisp"
+2010,75553,0,0,2010,"75,553","0",[object Object]
+2011,76614,1061,0.014043122046775158,2011,"76,614","1,061",[object Object]
+2012,77326,712,0.009293340642702486,2012,"77,326","712",[object Object]
+2013,78015,689,0.008910327703489207,2013,"78,015","689",[object Object]
+2014,78242,227,0.002909696853169219,2014,"78,242","227",[object Object]
+2015,79263,1021,0.01304925743206975,2015,"79,263","1,021",[object Object]
+2016,79871,608,0.00767066601062294,2016,"79,871","608",[object Object]
+2017,80567,696,0.008714051407895163,2017,"80,567","696",[object Object]
+2018,81096,529,0.006565963732049207,2018,"81,096","529",[object Object]
+2019,81753,657,0.008101509322284706,2019,"81,753","657",[object Object]
+2020,78973,-2780,-0.03400486832287497,2020,"78,973","-2,780",[object Object]
+2021,79118,145,0.001836070555759628,2021,"79,118","145",[object Object]
+2022,79287,169,0.0021360499507065978,2022,"79,287","169",[object Object]
+2023,79444,157,0.0019801480696708396,2023,"79,444","157",[object Object]
+2024,79601,157,0.001976234832082868,2024,"79,601","157",[object Object]
+2025,79758,157,0.0019723370309419064,2025,"79,758","157",[object Object]
+2026,79915,157,0.00196845457508954,2026,"79,915","157",[object Object]
+2027,80072,157,0.001964587374085003,2027,"80,072","157",[object Object]
+2028,80229,157,0.0019607353381956294,2028,"80,229","157",[object Object]
+2029,80386,157,0.001956898378391747,2029,"80,386","157",[object Object]
+1830,4630,-75756,-0.942402905978653,1830,"4,630","-75,756",[object Object]
+1840,6395,1765,0.3812095032397409,1840,"6,395","1,765",[object Object]
+1850,8071,1676,0.26207974980453486,1850,"8,071","1,676",[object Object]
+1860,6853,-1218,-0.15091066782307028,1860,"6,853","-1,218",[object Object]
+1870,6825,-28,-0.0040858018386108474,1870,"6,825","-28",[object Object]
+1880,15959,9134,1.3383150183150185,1880,"15,959","9,134",[object Object]
+1890,19709,3750,0.23497712889278777,1890,"19,709","3,750",[object Object]
+1900,18891,-818,-0.04150388147546802,1900,"18,891","-818",[object Object]
+1910,29494,10603,0.5612725636546503,1910,"29,494","10,603",[object Object]
+1920,30070,576,0.01952939580931723,1920,"30,070","576",[object Object]
+1930,40661,10591,0.35221150648486854,1930,"40,661","10,591",[object Object]
+1940,44541,3880,0.09542313273161018,1940,"44,541","3,880",[object Object]
+1950,47727,3186,0.07152960193978575,1950,"47,727","3,186",[object Object]
+1960,54790,7063,0.14798751230959417,1960,"54,790","7,063",[object Object]
+1970,54083,-707,-0.012903814564701577,1970,"54,083","-707",[object Object]
+1980,66743,12660,0.23408464767117199,1980,"66,743","12,660",[object Object]
+1990,66049,-694,-0.010398094182161421,1990,"66,049","-694",[object Object]
+2000,65269,-780,-0.01180941422277404,2000,"65,269","-780",[object Object]
