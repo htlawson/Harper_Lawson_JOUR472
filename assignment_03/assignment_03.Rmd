@@ -39,7 +39,7 @@ library (ggthemes)
 library (dplyr)
 
 # Assuming these packages are already installed.
-# Assuming base, datasets, forcats, graphics, purrr, readr, and stats are already installed and loaded.
+# Assuming base, datasets, forcats, graphics, tibble, purrr, readr, and stats are already installed and loaded.
 
 ```
 
@@ -129,7 +129,7 @@ lb_pop <- lb_pop %>%
   mutate(year = as.character(year))
 
 updated_general_crime_lb <- updated_general_crime_lb %>%
-  mutate(year = gsub("x", "", year))
+  mutate(year = str_replace(year, "x", ""))
 
 v_crime_rate_lb <- updated_general_crime_lb %>%
   right_join(lb_pop, by = c("year")) %>%
