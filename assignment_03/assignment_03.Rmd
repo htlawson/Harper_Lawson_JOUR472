@@ -1,10 +1,10 @@
 ---
-title: "Lawson_assignment_03"
+title: ""
 output: html_document
 date: "2024-04-23"
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -14,21 +14,21 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Background
 
-This data notebook includes data from the Lynchburg Police Department, the Federal Bureau of Investigation and the World Population Review. The data ranges from 2012-2023.
+This data notebook includes data from the Lynchburg Police Department, the Federal Bureau of Investigation and the World Population Review. The data ranges from 2012 to 2023.
 
 Analysis includes that of Lynchburg's population, violent crime rate, arrests by crime, general crime report, and assaults on police officers. Also analyzed is the state of Virginia's violent crime rate.
 
-The online data from the Lynchburg Police Department can be found [here](https://www.lynchburgvapolice.gov/crime/).
+The online data from the Lynchburg Police Department can be found [**here**](https://www.lynchburgvapolice.gov/crime/).
 
-The online data from the F.B.I. can be found [here](https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend).
+The online data from the F.B.I. can be found [**here**](https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend).
 
-The online data from the World Population Review can be found [here](https://worldpopulationreview.com/us-cities/lynchburg-va-population).
+The online data from the World Population Review can be found [**here**](https://worldpopulationreview.com/us-cities/lynchburg-va-population).
 
 ### Process
 
 To load the necessary packages:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 library (tidyverse)
 library (tidycensus)
@@ -45,7 +45,7 @@ library (dplyr)
 
 To load the necessary data:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 crime_type_lb <- read_csv("data/crime_type_lynchburg.csv") %>%
   clean_names() %>%
@@ -68,16 +68,16 @@ va_crime <- read_csv("data/crime_rates_va.csv") %>%
 
 #### In which areas has Lynchburg seen a *decrease* in crime? In which areas has Lynchburg seen an *increase* in crime?
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To create a column with percent change from 2012 to 2023:
 
 crime_type_lb <- crime_type_lb %>%
-  mutate(pct_change = ((x2023-x2012)/x2012) * 100)
+  mutate(pct_change = round(((x2023 - x2012) / x2012) * 100, 1))
 
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To show the categories that have seen a decrease in crime:
 
@@ -89,7 +89,7 @@ crime_type_lb %>%
 
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To show the categories that have seen an increase in crime:
 
@@ -107,7 +107,7 @@ Lynchburg has seen a decrease in all other crime categories (Lynchburg Police De
 
 Let's visualize 2012 and 2023's crime data:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To format the data frame:
 
@@ -120,7 +120,7 @@ crime_type_lb %>%
   select(crime_type, x2012) %>%
   ggplot(aes(x = crime_type, y = x2012, fill = x2012)) +
   geom_bar(stat = "identity") +
-  scale_fill_gradient(low = "#B0ABFF", high = "#0C27D0", limits = c(min_value, max_value)) +
+  scale_fill_gradient(low = "#B0ABFF", high = "#0C27D0") +
   scale_y_continuous(limits = c(0, 1500)) +
   labs(x = "Crime Type", y = "Number Reported",
        title = "Crimes Committed in 2012", fill = NULL) +
@@ -131,7 +131,7 @@ crime_type_lb %>%
   select(crime_type, x2023) %>%
   ggplot(aes(x = crime_type, y = x2023, fill = x2023)) +
   geom_bar(stat = "identity") +
-  scale_fill_gradient(low = "#B0ABFF", high = "#0C27D0", limits = c(min_value, max_value)) +
+  scale_fill_gradient(low = "#B0ABFF", high = "#0C27D0") +
   scale_y_continuous(limits = c(0, 1500)) +
   labs(x = "Crime Type", y = "Number Reported",
        title = "Crimes Committed in 2023", fill = NULL) +
@@ -144,7 +144,7 @@ crime_type_lb %>%
 
 #### Out of all crime in Lynchburg, what trends have there been in the violent crime rate?
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To adjust the general crime data frame:
 
@@ -158,7 +158,7 @@ print(updated_general_crime_lb)
 
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To determine Lynchburg's violent crime rate and find the trend:
 
@@ -169,8 +169,8 @@ v_crime_rate_lb <- updated_general_crime_lb %>%
   right_join(lb_pop, by = c("year")) %>%
   select(year, population, violent_crime) %>%
   filter(year >= "2012" & year <= "2023") %>%
-  mutate(rate = as.numeric((violent_crime/population) * 100000))
-
+  mutate(rate = round((violent_crime / population) * 100000, 1))
+  
 v_crime_rate_lb <- v_crime_rate_lb %>%
   mutate(population = as.numeric(population))
 
@@ -180,8 +180,9 @@ v_crime_rate_lb %>%
   select(year, rate) %>%
   print()
 
-v_crime_dif_lb <- (((v_crime_rate_lb$rate[12]-v_crime_rate_lb$rate[1])/v_crime_rate_lb$rate[1]) * 100)
-cat("Percent change in Lynchburg's violent crime rate from 2012-2023:", v_crime_dif_lb, "%\n")
+v_crime_dif_lb <- round(((v_crime_rate_lb$rate[12] - v_crime_rate_lb$rate[1]) / v_crime_rate_lb$rate[1]) * 100, 1)
+
+cat("Percent change in Lynchburg's violent crime rate from 2012 to 2023:", v_crime_dif_lb, "%\n")
 
 ```
 
@@ -189,7 +190,7 @@ Lynchburg's violent crime rate decreased by 24% from 2012 to 2023 (Lynchburg Pol
 
 Let's visualize this:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To create a graph:
 
@@ -210,7 +211,7 @@ v_crime_rate_lb %>%
 
 ##### \*The most recent comparable year is 2022.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To store Lynchburg, Virginia, and the U.S.'s 2022 violent crime rates as values:
 
@@ -235,7 +236,7 @@ cat("Lynchburg's violent crime rate was", lb_us_v_crime_dif, "%", "lower than th
 
 Let's visualize this:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To create a violent crime rate data frame:
 
@@ -263,7 +264,7 @@ crime_rates_22 %>%
 
 #### Which year saw the most crime in Lynchburg? The least?
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To refresh the data:
 
@@ -273,7 +274,7 @@ crime_type_lb <- read_csv("data/crime_type_lynchburg.csv") %>%
 
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To add a Total row to the Lynchburg crime type data frame:
 
@@ -294,7 +295,7 @@ total_crime_rate_lb <- v_crime_rate_lb %>%
   right_join(updated_crime_type_lb, by = c("year")) %>%
   select(year, population, total_crime) %>%
   filter(year >= "2012" & year <= "2023") %>%
-  mutate(crimes_per_1000 = (total_crime/population) * 1000)
+  mutate(crimes_per_1000 = round((total_crime / population) * 1000, 1))
 
 # To display the results:
 
@@ -308,7 +309,7 @@ total_crime_rate_lb %>%
 
 Let's visualize this:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To create a graph:
 
@@ -327,7 +328,7 @@ total_crime_rate_lb %>%
 
 #### What is the most common crime committed in Lynchburg? The least?
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To refresh the data:
 
@@ -337,7 +338,7 @@ crime_type_lb <- read_csv("data/crime_type_lynchburg.csv") %>%
 
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To add a Total column to the Lynchburg crime type data frame:
 
@@ -354,13 +355,13 @@ crime_type_lb %>%
 
 ```
 
-While "All Other Offenses" were reported more than any specific crime, Larceny was the most committed crime in Lynchburg with 13,371 reports from 2012-2023.
+While "All Other Offenses" were reported more than any specific crime, Larceny was the most committed crime in Lynchburg with 13,371 reports from 2012 to 2023.
 
-Negligent Manslaughter was the least committed crime with only 2 reports from 2012-2023 (Lynchburg Police Department).
+Negligent Manslaughter was the least committed crime with only 2 reports from 2012 to 2023 (Lynchburg Police Department).
 
 Let's visualize violent crime totals versus property crime totals:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 # To format the data frame:
 
@@ -388,12 +389,12 @@ updated_general_crime_lb %>%
 
 ### Findings:
 
-So far, one of the most interesting/newsworthy findings is that Lynchburg saw a 100% decrease in runaways. in 2012, there were 122 reported runaways, and in 2023, zero. This is a pretty drastic change.
+So far, one of the most interesting/newsworthy findings is Lynchburg's decrease in Disorderly Conduct. This crime category had a substantial number of reports over the years, and it was definitely tracked up until 2023. Going from 97 reports in 2012 to 40 in 2023, there was a 60 percent decrease in Disorderly Conduct.
 
-On the other hand, Lynchburg saw 100+ percent increases in seven different categories of crime: Curfew/Loitering/Vagrancy Violation, Drug Equipment Violation, Motor Vehicle Theft, Bribery, Extortion/Bribery, Weapon Law Violation and Aggravated Assault. Curfew/Loitiering/Vagrancy Violation saw the highest increase at 350 percent.
+On the other hand, Lynchburg saw 100+ percent increases in seven different categories of crime: Curfew/Loitering/Vagrancy Violation, Drug Equipment Violation, Motor Vehicle Theft, Bribery, Extortion/Bribery, Weapon Law Violation and Aggravated Assault. Curfew/Loitering/Vagrancy Violation saw the highest increase at 350 percent.
 
-Another interesting finding is that Lynchburg saw a 32 percent decrease in its violent crime rate from 2012-2023. Also, that its violent crime rate as of 2022 was 62% higher than the state of Virginia's but about the same as that of the U.S. This goes to show that Virginia as a whole has a relatively low violent crime rate.
+Another interesting finding is that Lynchburg saw a 32 percent decrease in its violent crime rate from 2012 to 2023. Also, that its violent crime rate as of 2022 was 62 percent higher than the state of Virginia's but about the same as that of the U.S. This goes to show that Virginia as a whole has a relatively low violent crime rate.
 
 Question 4 revealed that Lynchburg's crime rate has been on a steady decline. 2023 saw the fewest amount of crimes reported starting with 2012, the highest count on the spectrum.
 
-Lastly, Larceny being the most committed (reported) crime in Lynchburg is definitely newsworthy. Larceny means stealing personal property, and while it saw a 39% decrease from 2012-2023, it was still reported far more than any other specific crime each year.
+Lastly, Larceny being the most committed (reported) crime in Lynchburg is definitely newsworthy. Larceny means stealing personal property, and while it saw a 39 percent decrease from 2012 to 2023, it was still reported far more than any other specific crime each year.
