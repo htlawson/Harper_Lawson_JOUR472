@@ -389,14 +389,32 @@ updated_general_crime_lb %>%
 
 ```
 
-### Findings:
+### Memo:
 
-So far, one of the most interesting/newsworthy findings is Lynchburg's decrease in Disorderly Conduct. This crime category had a substantial number of reports over the years, and it was definitely tracked up until 2023. Going from 97 reports in 2012 to 40 in 2023, there was a 60 percent decrease in Disorderly Conduct.
+#### Key findings
 
-On the other hand, Lynchburg saw 100+ percent increases in seven different categories of crime: Curfew/Loitering/Vagrancy Violation, Drug Equipment Violation, Motor Vehicle Theft, Bribery, Extortion/Bribery, Weapon Law Violation and Aggravated Assault. Curfew/Loitering/Vagrancy Violation saw the highest increase at 350 percent.
+Overall, the city of Lynchburg, Virginia has shown positive trends in crime from 2012 to 2023. Both the general crime rate and violent crime rate are down, even though the population has increased since 2012. Below, I will break down these trends in terms of reported crime numbers by category, Lynchburg's population, and the information relative to that of the state of Virginia as well as the United States.
 
-Another interesting finding is that Lynchburg saw a 32 percent decrease in its violent crime rate from 2012 to 2023. Also, that its violent crime rate as of 2022 was 62 percent higher than the state of Virginia's but about the same as that of the U.S. This goes to show that Virginia as a whole has a relatively low violent crime rate.
+One of the most interesting/newsworthy findings is Lynchburg's decrease in Disorderly Conduct. This crime category had a substantial number of reports over the years, and it was definitely tracked up until 2023. Going from 97 reports in 2012 to 40 in 2023, there was a 60 percent decrease in Disorderly Conduct.
 
-Question 4 revealed that Lynchburg's crime rate has been on a steady decline. 2023 saw the fewest amount of crimes reported starting with 2012, the highest count on the spectrum.
+On the other hand, Lynchburg saw 100+ percent increases in seven different categories of crime, but it was the reported totals of Drug Equipment Violations, motor Vehicle Thefts and Weapon Law Violations that are truly worth noting. These three crime types had a substantial number of reports in 2012, and an even more substantial number in 2023. Drug Equipment Violations, beginning with 34 reports in 2012 and having 149 reports in 2023, showed a 338 percent increase. Motor Vehicle Thefts, going from 74 reports in 2012 to 248 reports in 2023, saw a 235 percent increase. Lastly, there were 111 reports of Weapon Law Violations in 2012 and 234 reports in 2023, showing a 111 percent increase.
 
-Lastly, Larceny being the most committed (reported) crime in Lynchburg is definitely newsworthy. Larceny means stealing personal property, and while it saw a 39 percent decrease from 2012 to 2023, it was still reported far more than any other specific crime each year.
+Another interesting finding is that Lynchburg saw a 32 percent decrease in its violent crime rate from 2012 to 2023. Also, its violent crime rate as of 2022 was 62 percent higher than the state of Virginia's but about the same as that of the U.S. This goes to show that Virginia as a whole has a relatively low violent crime rate by comparison, an unexpected finding.
+
+Question 4 revealed that Lynchburg's crime rate has been on a steady decline. 2023 saw the fewest amount of crimes reported since 2012, which saw the highest count on the spectrum.
+
+Lastly, Larceny being the most committed (reported) crime in Lynchburg is intriguing. Larceny, or the theft of personal property, saw a 39 percent decrease from 2012 to 2023, but was still reported far more than any other specific crime each year.
+
+#### Pros and Cons of the Data
+
+The largest pro of the data analyzed from the Lynchburg Police Department, the World Population Review and the F.B.I. was that it was all relatively easy to interpret. Every data set used needed various sorts of cleaning and organizing, but no drastic restructuring was necessary at any point during my analysis.
+
+Also, there was simply more data available than I originally anticipated. The Lynchburg Police Department's website offers an extensive collection of data sets, not just on crimes and crime rates but also arrests, assaults on police, parking violations and more. The data sets that were used in this analysis included very helpful categorizations like breaking up crime reports into the individual types as well as labeling them as either violent or property crimes.
+
+A con I faced was the lack of context that came with certain statistics. For example, I was not sure if certain years that showed zero reports of a certain crime type really did experience no reports of that crime, or if it had simply ceased being tracked.
+
+#### On Future Verification
+
+If I were to use any of my findings as facts in a published story, I would certainly seek further verification. I imagine this would involve consulting data from the U.S. Census Bureau as well as contacting the Lynchburg Police Department directly. It would be important to read over their methodology in compiling the data, as well as seek any other verification and information they could provide.
+
+<br>
