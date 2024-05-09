@@ -1,9 +1,9 @@
 ---
 title: ''
 output:
-  pdf_document: default
   html_document:
     theme: cerulean
+  pdf_document: default
 date: "2024-04-23"
 ---
 
@@ -27,6 +27,8 @@ The online data from the F.B.I. can be found [**here**](https://cde.ucr.cjis.gov
 
 The online data from the World Population Review can be found [**here**](https://worldpopulationreview.com/us-cities/lynchburg-va-population).
 
+<!-- A rendered version of this data notebook can also be viewed online at https://htlawson.github.io/Harper_Lawson_JOUR472/assignment_03/assignment_03 -->
+
 ### Process
 
 To load the necessary packages:
@@ -34,7 +36,6 @@ To load the necessary packages:
 ```{r message=FALSE, warning=FALSE}
 
 library (tidyverse)
-library (tidycensus)
 library (rmarkdown)
 library (janitor)
 library (ggplot2)
@@ -123,7 +124,7 @@ crime_type_lb %>%
   select(crime_type, x2012) %>%
   ggplot(aes(x = crime_type, y = x2012, fill = x2012)) +
   geom_bar(stat = "identity") +
-  scale_fill_gradient(low = "#B0ABFF", high = "#0C27D0") +
+  scale_fill_gradient(low = "#ABCFD3", high = "#007ba7") +
   scale_y_continuous(limits = c(0, 1500)) +
   labs(x = "Crime Type", y = "Number Reported",
        title = "Crimes Committed in 2012", fill = NULL) +
@@ -134,7 +135,7 @@ crime_type_lb %>%
   select(crime_type, x2023) %>%
   ggplot(aes(x = crime_type, y = x2023, fill = x2023)) +
   geom_bar(stat = "identity") +
-  scale_fill_gradient(low = "#B0ABFF", high = "#0C27D0") +
+  scale_fill_gradient(low = "#ABCFD3", high = "#007ba7") +
   scale_y_continuous(limits = c(0, 1500)) +
   labs(x = "Crime Type", y = "Number Reported",
        title = "Crimes Committed in 2023", fill = NULL) +
@@ -202,7 +203,7 @@ v_crime_rate_lb %>%
   geom_point() +
   geom_line(aes(group = 1)) + 
   scale_y_continuous(limits = c(100, 600)) +
-  scale_color_gradient(low = "#B0ABFF", high = "#0C27D0") +
+  scale_color_gradient(low = "#ABCFD3", high = "#007ba7") +
   labs(x = "Year", y = "Violent Crime Rate",
        title = "Lynchburg's Violent Crime Rate from 2012 to 2023", color = NULL)
 
@@ -254,7 +255,7 @@ crime_rates_22 %>%
   ggplot(aes(x = place, y = crime_rate)) +
   geom_point(aes(color = crime_rate, size = crime_rate)) +
   scale_y_continuous(limits = c(200, 400)) +
-  scale_color_gradient(low = "#B0ABFF", high = "#0C27D0") +
+  scale_color_gradient(low = "#ABCFD3", high = "#007ba7") +
   scale_size(range = c(6, 10)) +
   labs(x = "Place", y = "Violent Crime Rate",
        title = "2022 Violent Crime Rates Compared", color = NULL) +
@@ -321,7 +322,7 @@ total_crime_rate_lb %>%
   geom_point() +
   geom_line(aes(group = 1)) + 
   scale_y_continuous(limits = c(0, 150)) +
-  scale_color_gradient(low = "#B0ABFF", high = "#0C27D0") +
+  scale_color_gradient(low = "#ABCFD3", high = "#007ba7") +
   labs(x = "Year", y = "Crime Rate",
        title = "Lynchburg's Crime Rate per 1,000 people from 2012 to 2023", color = NULL)
 
@@ -381,7 +382,7 @@ updated_general_crime_lb %>%
   pivot_longer(cols = c(violent_crime, property_crime), names_to = "crime_type", values_to = "Total") %>%
   ggplot(aes(x = year, y = Total, fill = crime_type)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
-  scale_fill_manual(values = c("#B0ABFF", "#0C27D0"), labels = c("Property Crime", "Violent Crime")) +
+  scale_fill_manual(values = c("#ABCFD3", "#007ba7"), labels = c("Property Crime", "Violent Crime")) +
   scale_y_continuous(limits = c(0, 2500)) +
   labs(x = "Year", y = "Number Reported",
        title = "Crime Totals from 2012 to 2023", fill = NULL) +
